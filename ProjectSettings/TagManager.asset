@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - FrontWheel
+  - SimpleGun
+  - miniGun
+  - Rocketlauncher
+  - DoubleminiGun
+  - Target
   layers:
   - Default
   - TransparentFX
@@ -12,8 +17,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 

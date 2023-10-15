@@ -1,0 +1,326 @@
+fileFormatVersion: 2
+guid: 4d7f32741e2e6c443a5d2de07cf069b9
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: MuscleCar_Body
+    100004: MuscleCar_FL_Wheel
+    100006: MuscleCar_FL_Wheel.001
+    100008: MuscleCar_FL_Wheel.002
+    100010: MuscleCar_FL_Wheel.003
+    100012: MuscleCar_Body.001
+    100014: LightGlow
+    100016: MuscleCar_Body_int
+    100018: MuscleCar_Body_int.001
+    100020: MuscleCar_Body int
+    100022: MuscleCar_Body int.001
+    100024: MuscleCar_Body original
+    100026: MuscleCar_Body int.002
+    100028: Cylinder
+    100030: Cylinder.001
+    100032: MuscleCar_FL_Wheel.004
+    100034: Cylinder.000
+    100036: MuscleCar_Body int.003
+    100038: MuscleCar_Body.000
+    100040: MuscleCar_Body.002
+    100042: Plane
+    100044: Cylinder.002
+    100046: Cylinder.003
+    100048: Plane.001
+    100050: Plane.002
+    100052: Plane.000
+    100054: Plane.003
+    100056: Plane.004
+    100058: Body_Gloss
+    100060: Body_Matt
+    100062: Chassis
+    100064: Interior
+    100066: Number_Plates
+    100068: Wheel_FL
+    100070: Wheel_FR
+    100072: Wheel_RL
+    100074: Wheel_RR
+    100076: Windows
+    400000: //RootNode
+    400002: MuscleCar_Body
+    400004: MuscleCar_FL_Wheel
+    400006: MuscleCar_FL_Wheel.001
+    400008: MuscleCar_FL_Wheel.002
+    400010: MuscleCar_FL_Wheel.003
+    400012: MuscleCar_Body.001
+    400014: LightGlow
+    400016: MuscleCar_Body_int
+    400018: MuscleCar_Body_int.001
+    400020: MuscleCar_Body int
+    400022: MuscleCar_Body int.001
+    400024: MuscleCar_Body original
+    400026: MuscleCar_Body int.002
+    400028: Cylinder
+    400030: Cylinder.001
+    400032: MuscleCar_FL_Wheel.004
+    400034: Cylinder.000
+    400036: MuscleCar_Body int.003
+    400038: MuscleCar_Body.000
+    400040: MuscleCar_Body.002
+    400042: Plane
+    400044: Cylinder.002
+    400046: Cylinder.003
+    400048: Plane.001
+    400050: Plane.002
+    400052: Plane.000
+    400054: Plane.003
+    400056: Plane.004
+    400058: Body_Gloss
+    400060: Body_Matt
+    400062: Chassis
+    400064: Interior
+    400066: Number_Plates
+    400068: Wheel_FL
+    400070: Wheel_FR
+    400072: Wheel_RL
+    400074: Wheel_RR
+    400076: Windows
+    2100000: Material.001
+    2100002: Material.002
+    2100004: Material.000
+    2100006: Material.004
+    2100008: Material.003
+    2100010: Material.005
+    2100012: Material.006
+    2100014: Material.007
+    2100016: Material.009
+    2100018: Material.008
+    2100020: No Name
+    2100022: Body_Gloss
+    2100024: Body_Matt
+    2100026: Chassis
+    2100028: Glass
+    2100030: Glow
+    2100032: PLATE
+    2300000: MuscleCar_Body
+    2300002: MuscleCar_FL_Wheel
+    2300004: MuscleCar_FL_Wheel.001
+    2300006: MuscleCar_FL_Wheel.002
+    2300008: MuscleCar_FL_Wheel.003
+    2300010: MuscleCar_Body.001
+    2300012: LightGlow
+    2300014: MuscleCar_Body_int
+    2300016: MuscleCar_Body_int.001
+    2300018: MuscleCar_Body int
+    2300020: MuscleCar_Body int.001
+    2300022: MuscleCar_Body original
+    2300024: MuscleCar_Body int.002
+    2300026: Cylinder
+    2300028: Cylinder.001
+    2300030: MuscleCar_FL_Wheel.004
+    2300032: Cylinder.000
+    2300034: MuscleCar_Body int.003
+    2300036: MuscleCar_Body.000
+    2300038: MuscleCar_Body.002
+    2300040: Plane
+    2300042: Cylinder.002
+    2300044: Cylinder.003
+    2300046: Plane.001
+    2300048: Plane.002
+    2300050: Plane.000
+    2300052: Plane.003
+    2300054: Plane.004
+    2300056: Body_Gloss
+    2300058: Body_Matt
+    2300060: Chassis
+    2300062: Interior
+    2300064: Number_Plates
+    2300066: Wheel_FL
+    2300068: Wheel_FR
+    2300070: Wheel_RL
+    2300072: Wheel_RR
+    2300074: Windows
+    3300000: MuscleCar_Body
+    3300002: MuscleCar_FL_Wheel
+    3300004: MuscleCar_FL_Wheel.001
+    3300006: MuscleCar_FL_Wheel.002
+    3300008: MuscleCar_FL_Wheel.003
+    3300010: MuscleCar_Body.001
+    3300012: LightGlow
+    3300014: MuscleCar_Body_int
+    3300016: MuscleCar_Body_int.001
+    3300018: MuscleCar_Body int
+    3300020: MuscleCar_Body int.001
+    3300022: MuscleCar_Body original
+    3300024: MuscleCar_Body int.002
+    3300026: Cylinder
+    3300028: Cylinder.001
+    3300030: MuscleCar_FL_Wheel.004
+    3300032: Cylinder.000
+    3300034: MuscleCar_Body int.003
+    3300036: MuscleCar_Body.000
+    3300038: MuscleCar_Body.002
+    3300040: Plane
+    3300042: Cylinder.002
+    3300044: Cylinder.003
+    3300046: Plane.001
+    3300048: Plane.002
+    3300050: Plane.000
+    3300052: Plane.003
+    3300054: Plane.004
+    3300056: Body_Gloss
+    3300058: Body_Matt
+    3300060: Chassis
+    3300062: Interior
+    3300064: Number_Plates
+    3300066: Wheel_FL
+    3300068: Wheel_FR
+    3300070: Wheel_RL
+    3300072: Wheel_RR
+    3300074: Windows
+    4300000: MuscleCar_Body
+    4300002: MuscleCar_FL_Wheel
+    4300004: MuscleCar_FL_Wheel.001
+    4300006: MuscleCar_FL_Wheel.003
+    4300008: MuscleCar_FL_Wheel.002
+    4300010: MuscleCar_Body.001
+    4300012: LightGlow
+    4300014: MuscleCar_Body_int.001
+    4300016: MuscleCar_Body_int
+    4300018: MuscleCar_Body int.001
+    4300020: MuscleCar_Body original
+    4300022: MuscleCar_Body int
+    4300024: MuscleCar_Body int.002
+    4300026: Cylinder.001
+    4300028: Cylinder
+    4300030: MuscleCar_FL_Wheel.004
+    4300032: MuscleCar_Body int.003
+    4300034: Cylinder.000
+    4300036: MuscleCar_Body.002
+    4300038: MuscleCar_Body.000
+    4300040: Plane
+    4300042: Cylinder.003
+    4300044: Cylinder.002
+    4300046: Plane.001
+    4300048: Plane.002
+    4300050: Plane.000
+    4300052: Plane.003
+    4300054: Plane.004
+    4300056: Body_Gloss
+    4300058: Body_Matt
+    4300060: Wheel_FL
+    4300062: Interior
+    4300064: Windows
+    4300066: Chassis
+    4300068: Wheel_RL
+    4300070: Wheel_RR
+    4300072: Wheel_FR
+    4300074: Number_Plates
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_Gloss
+    second: {fileID: 2100000, guid: 6c2a944ff11864342855e4a08941961b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_Matt
+    second: {fileID: 2100000, guid: efcfe6e21f714cf40b571b972198f71c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chassis
+    second: {fileID: 2100000, guid: 66a585a377f319b4cba151012657b4ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 073d712e33fcc7a46b769363c617a48d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glow
+    second: {fileID: 2100000, guid: b00b9a5956f4c9d4889c7b3e7a9a36ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PLATE
+    second: {fileID: 2100000, guid: 87cfa02e0b0eb9949b117ae238e54e0c, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,205 @@
+fileFormatVersion: 2
+guid: 4b55a021503aaa04e922bf82db06984f
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Cylinder.000
+    100004: Cylinder.001
+    100006: Cylinder.002
+    100008: Cylinder.003
+    100010: Plane
+    100012: Plane.001
+    100014: Plane.002
+    100016: Body_Gloss
+    100018: Chassis
+    100020: Interior
+    100022: Windows
+    100024: Body_Matt
+    100026: Plates
+    100028: Glow_Objects
+    400000: //RootNode
+    400002: Cylinder.000
+    400004: Cylinder.001
+    400006: Cylinder.002
+    400008: Cylinder.003
+    400010: Plane
+    400012: Plane.001
+    400014: Plane.002
+    400016: Body_Gloss
+    400018: Chassis
+    400020: Interior
+    400022: Windows
+    400024: Body_Matt
+    400026: Plates
+    400028: Glow_Objects
+    2100000: No Name
+    2100002: Material.002
+    2100004: INTERIOR
+    2100006: Body_Matt
+    2100008: Chassis
+    2100010: Glass
+    2100012: Body_Gloss
+    2100014: PLATE
+    2100016: Chassis.001
+    2100018: Body_Gloss.001
+    2100020: GLOW
+    2300000: Cylinder.000
+    2300002: Cylinder.001
+    2300004: Cylinder.002
+    2300006: Cylinder.003
+    2300008: Plane
+    2300010: Plane.001
+    2300012: Plane.002
+    2300014: Body_Gloss
+    2300016: Chassis
+    2300018: Interior
+    2300020: Windows
+    2300022: Body_Matt
+    2300024: Plates
+    2300026: Glow_Objects
+    3300000: Cylinder.000
+    3300002: Cylinder.001
+    3300004: Cylinder.002
+    3300006: Cylinder.003
+    3300008: Plane
+    3300010: Plane.001
+    3300012: Plane.002
+    3300014: Body_Gloss
+    3300016: Chassis
+    3300018: Interior
+    3300020: Windows
+    3300022: Body_Matt
+    3300024: Plates
+    3300026: Glow_Objects
+    4300000: Plane
+    4300002: Cylinder.000
+    4300004: Cylinder.001
+    4300006: Cylinder.003
+    4300008: Cylinder.002
+    4300010: Plane.002
+    4300012: Plane.001
+    4300014: Chassis
+    4300016: Interior
+    4300018: Windows
+    4300020: Body_Gloss
+    4300022: Body_Matt
+    4300024: Plates
+    4300026: Glow_Objects
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_Gloss
+    second: {fileID: 2100000, guid: e59047cb0564d244681b0f09beffa789, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_Gloss.001
+    second: {fileID: 2100000, guid: e59047cb0564d244681b0f09beffa789, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_Matt
+    second: {fileID: 2100000, guid: cca9d6083bf373d4e99846e5ade81a89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chassis
+    second: {fileID: 2100000, guid: 72c270f3ab86abd418d1a5b099888bdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GLOW
+    second: {fileID: 2100000, guid: b978a2f8464150a47a783a1033bb724d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 630c34ece983b4a4e93b9236d93e8443, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PLATE
+    second: {fileID: 2100000, guid: 87cfa02e0b0eb9949b117ae238e54e0c, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

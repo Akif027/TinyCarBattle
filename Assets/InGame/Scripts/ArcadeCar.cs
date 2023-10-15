@@ -1,12 +1,12 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
-
+using Photon.Pun;
 
 
 public class ArcadeCar : MonoBehaviour
 {
-
+    
 
     const int WHEEL_LEFT_INDEX = 0;
     const int WHEEL_RIGHT_INDEX = 1;
@@ -16,6 +16,12 @@ public class ArcadeCar : MonoBehaviour
 
 
     public Vector3 centerOfMass = Vector3.zero;
+
+    [Header("PUN")]
+
+    [SerializeField] PhotonView view;
+
+
 
     [Header("Engine")]
 
@@ -62,7 +68,8 @@ public class ArcadeCar : MonoBehaviour
 
     public Axle[] axles = new Axle[2];
 
- 
+
+
 
     float afterFlightSlipperyTiresTime = 0.0f;
     float brakeSlipperyTiresTime = 0.0f;
@@ -86,15 +93,19 @@ public class ArcadeCar : MonoBehaviour
 
     void Start()
     {
+        view = GetComponent<PhotonView>();
+        if (view.IsMine)
+        {
+           
+            style.normal.textColor = Color.red;
+
+            rb = GetComponent<Rigidbody>();
+            rb.centerOfMass = centerOfMass;
 
 
-        style.normal.textColor = Color.red;
+        }
 
-        rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = centerOfMass;
     }
-
-
 
     float GetHandBrakeK()
     {
@@ -358,120 +369,128 @@ public class ArcadeCar : MonoBehaviour
 
     void Update()
     {
-        ApplyVisual();
+
+            ApplyVisual();
+    
+      
 
     }
 
     void FixedUpdate()
     {
-        UpdateInput();
-
-        accelerationForceMagnitude = CalcAccelerationForceMagnitude();
-
-        // 0.8 - pressed
-        // 1.0 - not pressed
-        float accelerationK = Mathf.Clamp01(0.8f + (1.0f - GetHandBrakeK()) * 0.2f);
-        accelerationForceMagnitude *= accelerationK;
-
-        CalculateAckermannSteering();
-
-        int numberOfPoweredWheels = 0;
-        for (int axleIndex = 0; axleIndex < axles.Length; axleIndex++)
+        if (view.IsMine)
         {
-            if (axles[axleIndex].isPowered)
+            UpdateInput();
+
+            accelerationForceMagnitude = CalcAccelerationForceMagnitude();
+
+            // 0.8 - pressed
+            // 1.0 - not pressed
+            float accelerationK = Mathf.Clamp01(0.8f + (1.0f - GetHandBrakeK()) * 0.2f);
+            accelerationForceMagnitude *= accelerationK;
+
+            CalculateAckermannSteering();
+
+            int numberOfPoweredWheels = 0;
+            for (int axleIndex = 0; axleIndex < axles.Length; axleIndex++)
             {
-                numberOfPoweredWheels += 2;
+                if (axles[axleIndex].isPowered)
+                {
+                    numberOfPoweredWheels += 2;
+                }
+            }
+
+
+            int totalWheelsCount = axles.Length * 2;
+            for (int axleIndex = 0; axleIndex < axles.Length; axleIndex++)
+            {
+                CalculateAxleForces(axles[axleIndex], totalWheelsCount, numberOfPoweredWheels);
+            }
+
+            bool allWheelIsOnAir = true;
+            for (int axleIndex = 0; axleIndex < axles.Length; axleIndex++)
+            {
+                if (axles[axleIndex].wheelDataL.isOnGround || axles[axleIndex].wheelDataR.isOnGround)
+                {
+                    allWheelIsOnAir = false;
+                    break;
+                }
+            }
+
+            if (allWheelIsOnAir)
+            {
+                // set after flight tire slippery time (1 sec)
+                afterFlightSlipperyTiresTime = 1.0f;
+
+                // Try to keep vehicle parallel to the ground while jumping
+                Vector3 carUp = transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
+                Vector3 worldUp = new Vector3(0.0f, 1.0f, 0.0f);
+
+
+
+                Vector3 axis = Vector3.Cross(carUp, worldUp);
+                //axis.Normalize ();
+
+                float mass = rb.mass;
+
+                // angular velocity damping
+                Vector3 angVel = rb.angularVelocity;
+
+                Vector3 angVelDamping = angVel;
+                angVelDamping.y = 0.0f;
+                angVelDamping = angVelDamping * Mathf.Clamp01(flightStabilizationDamping * Time.fixedDeltaTime);
+
+                //Debug.Log(string.Format("Ang {0}, Damping {1}", angVel, angVelDamping));
+                rb.angularVelocity = angVel - angVelDamping;
+
+                // in flight roll stabilization
+                rb.AddTorque(axis * flightStabilizationForce * mass);
+            }
+            else
+            {
+                // downforce
+                Vector3 carDown = transform.TransformDirection(new Vector3(0.0f, -1.0f, 0.0f));
+
+                float speed = GetSpeed();
+                float speedKmH = Mathf.Abs(speed) * 3.6f;
+
+                float downForceAmount = downForceCurve.Evaluate(speedKmH) / 100.0f;
+
+                float mass = rb.mass;
+
+                rb.AddForce(carDown * mass * downForceAmount * downForce);
+
+                //Debug.Log(string.Format("{0} downforce", downForceAmount * downForce));
+            }
+
+            if (afterFlightSlipperyTiresTime > 0.0f)
+            {
+                afterFlightSlipperyTiresTime -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                afterFlightSlipperyTiresTime = 0.0f;
+            }
+
+            if (brakeSlipperyTiresTime > 0.0f)
+            {
+                brakeSlipperyTiresTime -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                brakeSlipperyTiresTime = 0.0f;
+            }
+
+            if (handBrakeSlipperyTiresTime > 0.0f)
+            {
+                handBrakeSlipperyTiresTime -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                handBrakeSlipperyTiresTime = 0.0f;
             }
         }
-
-
-        int totalWheelsCount = axles.Length * 2;
-        for (int axleIndex = 0; axleIndex < axles.Length; axleIndex++)
-        {
-            CalculateAxleForces(axles[axleIndex], totalWheelsCount, numberOfPoweredWheels);
-        }
-
-        bool allWheelIsOnAir = true;
-        for (int axleIndex = 0; axleIndex < axles.Length; axleIndex++)
-        {
-            if (axles[axleIndex].wheelDataL.isOnGround || axles[axleIndex].wheelDataR.isOnGround)
-            {
-                allWheelIsOnAir = false;
-                break;
-            }
-        }
-
-        if (allWheelIsOnAir)
-        {
-            // set after flight tire slippery time (1 sec)
-            afterFlightSlipperyTiresTime = 1.0f;
-
-            // Try to keep vehicle parallel to the ground while jumping
-            Vector3 carUp = transform.TransformDirection(new Vector3(0.0f, 1.0f, 0.0f));
-            Vector3 worldUp = new Vector3(0.0f, 1.0f, 0.0f);
-
-
-         
-            Vector3 axis = Vector3.Cross(carUp, worldUp);
-            //axis.Normalize ();
-
-            float mass = rb.mass;
-
-            // angular velocity damping
-            Vector3 angVel = rb.angularVelocity;
-
-            Vector3 angVelDamping = angVel;
-            angVelDamping.y = 0.0f;
-            angVelDamping = angVelDamping * Mathf.Clamp01(flightStabilizationDamping * Time.fixedDeltaTime);
-
-            //Debug.Log(string.Format("Ang {0}, Damping {1}", angVel, angVelDamping));
-            rb.angularVelocity = angVel - angVelDamping;
-
-            // in flight roll stabilization
-            rb.AddTorque(axis * flightStabilizationForce * mass);
-        } else
-        {
-            // downforce
-            Vector3 carDown = transform.TransformDirection(new Vector3(0.0f, -1.0f, 0.0f));
-
-            float speed = GetSpeed();
-            float speedKmH = Mathf.Abs(speed) * 3.6f;
-
-            float downForceAmount = downForceCurve.Evaluate(speedKmH) / 100.0f;
-
-            float mass = rb.mass;
-
-            rb.AddForce(carDown * mass * downForceAmount * downForce);
-
-            //Debug.Log(string.Format("{0} downforce", downForceAmount * downForce));
-        }
-
-        if (afterFlightSlipperyTiresTime > 0.0f)
-        {
-            afterFlightSlipperyTiresTime -= Time.fixedDeltaTime;
-        }
-        else
-        {
-            afterFlightSlipperyTiresTime = 0.0f;
-        }
-
-        if (brakeSlipperyTiresTime > 0.0f)
-        {
-            brakeSlipperyTiresTime -= Time.fixedDeltaTime;
-        }
-        else
-        {
-            brakeSlipperyTiresTime = 0.0f;
-        }
-
-        if (handBrakeSlipperyTiresTime > 0.0f)
-        {
-            handBrakeSlipperyTiresTime -= Time.fixedDeltaTime;
-        }
-        else
-        {
-            handBrakeSlipperyTiresTime = 0.0f;
-        }
+        
 
     }
 
