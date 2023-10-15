@@ -69,16 +69,16 @@ public class WeaponSystem : MonoBehaviourPun
         switch (Type)
         {
             case WeaponType.SimpleGun:
-                view.RPC("SimpleGunWeapon", RpcTarget.All);
+                view.RPC("SimpleGunWeapon", RpcTarget.AllBuffered);
                 break;
             case WeaponType.miniGun :
-                view.RPC("MiniGunWeapon", RpcTarget.All);
+                view.RPC("MiniGunWeapon", RpcTarget.AllBuffered);
                 break;
             case WeaponType.DoubleminiGun:
-                view.RPC("MiniGunWeapon", RpcTarget.All);
+                view.RPC("MiniGunWeapon", RpcTarget.AllBuffered);
                 break;
             case WeaponType.Rocketlauncher:
-                view.RPC("RocketLauncherWeapon", RpcTarget.All);
+                view.RPC("RocketLauncherWeapon", RpcTarget.AllBuffered);
                 break;
         }
     }

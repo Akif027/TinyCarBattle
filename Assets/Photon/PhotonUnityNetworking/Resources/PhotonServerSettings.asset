@@ -17,9 +17,9 @@ MonoBehaviour:
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
-    AppVersion: 
+    AppVersion: 1.0
     UseNameServer: 1
-    FixedRegion: 
+    FixedRegion: in
     Server: 
     Port: 0
     ProxyServer: 
@@ -34,18 +34,17 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
-  - ClickRpc
-  - DestroyRpc
-  - DestroySpaceship
-  - Fire
-  - RespawnSpaceship
-  - Shoot
   - MiniGunWeapon
   - RocketLauncherWeapon
   - TurretWeapon
   - SimpleGunWeapon
   - DisbleOverNetwork
+  - ClickRpc
+  - DestroyRpc
+  - DestroySpaceship
   - DisableOverNetwork
+  - Fire
+  - RespawnSpaceship
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 1

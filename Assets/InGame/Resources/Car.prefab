@@ -1188,8 +1188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PositionModel:
     SynchronizeEnabled: 1
-    TeleportEnabled: 0
-    TeleportIfDistanceGreaterThan: 0
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 10
     InterpolateOption: 2
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 1
@@ -1201,7 +1201,7 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     InterpolateOption: 1
     InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 5
+    InterpolateLerpSpeed: 10
   m_ScaleModel:
     SynchronizeEnabled: 0
     InterpolateOption: 0
