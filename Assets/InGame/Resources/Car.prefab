@@ -1243,8 +1243,8 @@ MonoBehaviour:
   weaponData:
   - Name: simpleGun
     FirePoint: {fileID: 3767372468630490462}
-    AmmoPrefab: {fileID: 1061155343974116104}
-    WeaponPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
+    AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
+    WeaponPrefab: {fileID: 1061155343974116104}
     nextFireTime: 0
     fireRate: 0.5
   - Name: Minigun

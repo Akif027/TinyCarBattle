@@ -93,9 +93,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3623231500235825925}
   - component: {fileID: 4641393818062834348}
+  - component: {fileID: 2379237230239766031}
   m_Layer: 0
   m_Name: DoubleMiniGun
-  m_TagString: Untagged
+  m_TagString: DoubleminiGun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +108,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3623231500235341605}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -29.082, y: 1.219, z: -7.4208326}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -129,8 +130,23 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -0.36, y: 0, z: 0}
+--- !u!114 &2379237230239766031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3623231500235341605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558a647a4869d7c419b0950bd15c723a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 45
+  moveSpeed: 2
+  amplitude: 0.2
 --- !u!1 &3623231500235341607
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 398552337659887647, guid: 23fde9f7c6bb71249a925f1631408db1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4153347
+      value: -0.568
       objectReference: {fileID: 0}
     - target: {fileID: 398552337659887647, guid: 23fde9f7c6bb71249a925f1631408db1, type: 3}
       propertyPath: m_LocalPosition.y

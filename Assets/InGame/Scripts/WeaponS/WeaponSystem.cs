@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Tarodev;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class WeaponSystem : MonoBehaviourPun
 {
@@ -16,15 +17,14 @@ public class WeaponSystem : MonoBehaviourPun
     [Header("HomingMissle")]
     public float detectionRadius = 10f;
     public LayerMask enemyLayer;
-   
-
+    private ObjectPool projectilePool;
     public WeaponData[] weaponData = new WeaponData[3];
 
+   
     private void Start()
     {
         view = GetComponent<PhotonView>();
-        if (view.IsMine)
-        {
+      
             Type = WeaponType.SimpleGun;
 
             enemyLayer = LayerMask.GetMask("Enemy");
@@ -34,8 +34,7 @@ public class WeaponSystem : MonoBehaviourPun
                 weaponData[i].WeaponPrefab.SetActive(false);
             }
 
-        }
-
+     
 
         int targetLayer = view.IsMine?  LayerMask.NameToLayer("Player"): LayerMask.NameToLayer("Enemy");
 
@@ -57,7 +56,8 @@ public class WeaponSystem : MonoBehaviourPun
         if (view.IsMine)
         {
          
-            ChangeWeaponOnType();
+         ChangeWeaponOnType();
+          
         }
 
     }
@@ -69,16 +69,20 @@ public class WeaponSystem : MonoBehaviourPun
         switch (Type)
         {
             case WeaponType.SimpleGun:
-                view.RPC("SimpleGunWeapon", RpcTarget.AllBuffered);
+                if (Input.GetMouseButtonDown(0) && Time.time >= weaponData[0].nextFireTime)
+                {
+                    view.RPC("SimpleGunWeapon", RpcTarget.All);
+
+                }
                 break;
             case WeaponType.miniGun :
-                view.RPC("MiniGunWeapon", RpcTarget.AllBuffered);
+                view.RPC("MiniGunWeapon", RpcTarget.All);
                 break;
             case WeaponType.DoubleminiGun:
-                view.RPC("MiniGunWeapon", RpcTarget.AllBuffered);
+                view.RPC("MiniGunWeapon", RpcTarget.All);
                 break;
             case WeaponType.Rocketlauncher:
-                view.RPC("RocketLauncherWeapon", RpcTarget.AllBuffered);
+                view.RPC("RocketLauncherWeapon", RpcTarget.All);
                 break;
         }
     }
@@ -90,8 +94,7 @@ public class WeaponSystem : MonoBehaviourPun
       
        
         // Vector3 Temp = new Vector3(target.transform.position.x, 5, target.transform.position.z);
-        if (Input.GetMouseButtonDown(0) && Time.time >= weaponData[0].nextFireTime)
-        {
+     
             Debug.Log("gun firing");
         
             weaponData[0].nextFireTime = Time.time + weaponData[0].fireRate;
@@ -112,7 +115,7 @@ public class WeaponSystem : MonoBehaviourPun
                 // Apply the adjusted speed to the bullet's velocity
                 projectile.GetComponent<Rigidbody>().velocity = weaponData[0].FirePoint.transform.forward * adjustedBulletSpeed;
             }
-        }
+     
       
 
     }
@@ -123,8 +126,8 @@ public class WeaponSystem : MonoBehaviourPun
 
         if (Type == WeaponType.miniGun)
         {
-           
-                weaponData[1].WeaponPrefab.SetActive(true);
+
+            weaponData[1].WeaponPrefab.SetActive(true);
             weaponData[2].WeaponPrefab.SetActive(false);
 
             // Vector3 Temp = new Vector3(target.transform.position.x, 5, target.transform.position.z);
@@ -156,7 +159,7 @@ public class WeaponSystem : MonoBehaviourPun
             }
 
         }
-        else if(Type == WeaponType.DoubleminiGun)
+        else if (Type == WeaponType.DoubleminiGun)
         {
             weaponData[1].WeaponPrefab.SetActive(true);
             weaponData[2].WeaponPrefab.SetActive(true);
@@ -198,8 +201,8 @@ public class WeaponSystem : MonoBehaviourPun
     private void RocketLauncherWeapon()
     {
         weaponData[3].WeaponPrefab.SetActive(true);
-      
-        if (Input.GetMouseButtonDown(0)  && Time.time >= weaponData[3].nextFireTime )
+
+        if (Input.GetMouseButtonDown(0) && Time.time >= weaponData[3].nextFireTime)
         {
             GameObject Target = FindTarget();
             Debug.Log("Rocket firing");
@@ -207,14 +210,14 @@ public class WeaponSystem : MonoBehaviourPun
             weaponData[3].nextFireTime = Time.time + weaponData[3].fireRate;
 
             GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[3].AmmoPrefab);
-             Missile missile = projectile.GetComponent<Missile>();
+            Missile missile = projectile.GetComponent<Missile>();
             float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
             if (projectile != null)
             {
                 // logic for getting the target 
                 if (Target != null)
                 {
-                   
+
                     missile.enabled = true;
                     missile._target = Target.GetComponent<Target>();
                 }
@@ -230,14 +233,14 @@ public class WeaponSystem : MonoBehaviourPun
                 projectile.transform.position = weaponData[3].FirePoint.transform.position;
                 projectile.transform.rotation = weaponData[3].FirePoint.transform.rotation;
                 projectile.GetComponent<Rigidbody>().velocity = weaponData[3].FirePoint.transform.forward * adjustedBulletSpeed;
-               
+
 
             }
 
 
 
         }
-       
+
     }
 
     private GameObject FindTarget()
