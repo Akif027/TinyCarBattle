@@ -1240,29 +1240,36 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  countdownText: {fileID: 0}
+  countdownTime: 10
+  isCountingDown: 0
   weaponData:
   - Name: simpleGun
     FirePoint: {fileID: 3767372468630490462}
     AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
     WeaponPrefab: {fileID: 1061155343974116104}
+    WeaponTime: 15
     nextFireTime: 0
     fireRate: 0.5
   - Name: Minigun
     FirePoint: {fileID: 232658862}
     AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
     WeaponPrefab: {fileID: 1265905780}
+    WeaponTime: 15
     nextFireTime: 0
     fireRate: 0.2
   - Name: DoubleMiniGun
     FirePoint: {fileID: 1731923661}
     AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
     WeaponPrefab: {fileID: 1946555057}
+    WeaponTime: 15
     nextFireTime: 0
     fireRate: 0.2
   - Name: missile
     FirePoint: {fileID: 872852437}
     AmmoPrefab: {fileID: 4349954651744972842, guid: e4399ca1e45073c4abd6795c55320ce6, type: 3}
     WeaponPrefab: {fileID: 814534988}
+    WeaponTime: 15
     nextFireTime: 0
     fireRate: 1
 --- !u!114 &-4459368853435011680

@@ -1,11 +1,15 @@
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using System;
+using System.Collections;
 using Tarodev;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class WeaponSystem : MonoBehaviourPun
 {
-  
+
     public WeaponType Type;
 
     PhotonView view;
@@ -13,37 +17,43 @@ public class WeaponSystem : MonoBehaviourPun
     [Header("HomingMissle")]
     public float detectionRadius = 10f;
     public LayerMask enemyLayer;
-
+    [SerializeField] Text countdownText; // this Text is for weaponTimeTextDisplay
+    public float countdownTime = 10.0f; // Adjust this time as needed
+    public bool isCountingDown = false;
     public WeaponData[] weaponData = new WeaponData[3];
 
-   
+
+    private void Awake()
+    {
+        countdownText = UImanager.instance.countdownText;
+    }
     private void Start()
     {
         view = GetComponent<PhotonView>();
-      
-            Type = WeaponType.SimpleGun;
 
-            enemyLayer = LayerMask.GetMask("Enemy");
+        Type = WeaponType.SimpleGun;
+       
+      enemyLayer = LayerMask.GetMask("Enemy");
 
-            for (int i = 1; i < weaponData.Length; i++) //disable the weapon at start execpt the simple gun 
-            {
-                weaponData[i].WeaponPrefab.SetActive(false);
-            }
+        for (int i = 1; i < weaponData.Length; i++) //disable the weapon at start execpt the simple gun 
+        {
+            weaponData[i].WeaponPrefab.SetActive(false);
+        }
 
-     
 
-        int targetLayer = view.IsMine?  LayerMask.NameToLayer("Player"): LayerMask.NameToLayer("Enemy");
 
-            // Check if the layer exists before setting it
-            if (targetLayer != -1)
-            {
-                // Set the layer of the GameObject
-                gameObject.layer = targetLayer;
-            }
-            else
-            {
-                Debug.LogError("Layer " + "Player" + " does not exist.");
-            }
+        int targetLayer = view.IsMine ? LayerMask.NameToLayer("Player") : LayerMask.NameToLayer("Enemy");
+
+        // Check if the layer exists before setting it
+        if (targetLayer != -1)
+        {
+            // Set the layer of the GameObject
+            gameObject.layer = targetLayer;
+        }
+        else
+        {
+            Debug.LogError("Layer " + "Player" + " does not exist.");
+        }
 
     }
 
@@ -51,12 +61,45 @@ public class WeaponSystem : MonoBehaviourPun
     {
         if (view.IsMine)
         {
+
+            ChangeWeaponOnType();
          
-          ChangeWeaponOnType();
-          
         }
 
     }
+
+
+
+    private void DisableObjectAfterTime(int WeaponIndex, int WeaponIndex2 =0)
+    {
+        if (countdownTime > 0)
+        {
+            countdownTime -= Time.deltaTime;
+            if (countdownText != null)
+            {
+                countdownText.text = "Time left: " + countdownTime.ToString("F1"); // Display with one decimal place
+            }
+        }
+        else
+        {
+            if (countdownText != null)
+            {
+                countdownText.text = "Time left: 0";
+            }
+
+            // Disable the GameObject when the countdown reaches zero
+            DisableWeapon(WeaponIndex);
+
+            if (WeaponIndex2 != 0)
+            {
+                DisableWeapon(WeaponIndex2);
+            }
+
+            isCountingDown = false;
+            Type = WeaponType.SimpleGun;
+        }
+    }
+
 
     #region LogicForWeaponAttack
 
@@ -73,31 +116,43 @@ public class WeaponSystem : MonoBehaviourPun
                 }
                 break;
             case WeaponType.miniGun:
+                if (!isCountingDown)
+                {
+                    EnableWeapon(1);
+                    DisableWeapon(2);
+                    countdownTime = weaponData[1].WeaponTime;
+                    isCountingDown = true;
+                   
 
-                EnableWeapon(1);
-                DisableWeapon(2);
-
+                }
+                DisableObjectAfterTime(1);
                 if (Input.GetMouseButton(0) && Time.time >= weaponData[1].nextFireTime)
                 {
                     view.RPC("MiniGunWeapon", RpcTarget.All);
                 }
                 break;
             case WeaponType.DoubleminiGun:
-
-                EnableWeapon(2);
-                EnableWeapon(1);
-
+                if (!isCountingDown)
+                {
+                  
+                    EnableWeapon(2);
+                    EnableWeapon(1);
+                    countdownTime = weaponData[2].WeaponTime;
+                    isCountingDown = true;
+                  
+                }
+                DisableObjectAfterTime(1,2);
                 if (Input.GetMouseButton(0) && Time.time >= weaponData[1].nextFireTime)
                 {
                     view.RPC("MiniGunWeapon", RpcTarget.All);
                 }
                 break;
             case WeaponType.Rocketlauncher:
-        
-                EnableWeapon(3);
 
-                if (Input.GetMouseButtonDown(0) && Time.time >= weaponData[3].nextFireTime) 
-                { 
+                EnableWeapon(3);
+              //  StartCoroutine(DisableObjectAfterTime(3, weaponData[3].WeaponTime));
+                if (Input.GetMouseButtonDown(0) && Time.time >= weaponData[3].nextFireTime)
+                {
                     view.RPC("RocketLauncherWeapon", RpcTarget.All);
                 }
                 break;
@@ -107,33 +162,31 @@ public class WeaponSystem : MonoBehaviourPun
     [PunRPC]
     private void SimpleGunWeapon()
     {
-     
-      
-       
+
         // Vector3 Temp = new Vector3(target.transform.position.x, 5, target.transform.position.z);
-     
-            Debug.Log("gun firing");
-        
-            weaponData[0].nextFireTime = Time.time + weaponData[0].fireRate;
 
-            GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[0].AmmoPrefab);
-            float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
-            if (projectile != null)
-            {
+        Debug.Log("gun firing");
 
-                projectile.transform.position = weaponData[0].FirePoint.transform.position;
-                projectile.transform.rotation = weaponData[0].FirePoint.transform.rotation;
-                float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
-                float bulletBaseSpeed = 15; // The base speed of the bullet
-                float currentMoveSpeed = currentSpeed * 1.2f;
-                // Calculate the bullet speed based on the player's speed
-                float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
+        weaponData[0].nextFireTime = Time.time + weaponData[0].fireRate;
 
-                // Apply the adjusted speed to the bullet's velocity
-                projectile.GetComponent<Rigidbody>().velocity = weaponData[0].FirePoint.transform.forward * adjustedBulletSpeed;
-            }
-     
-      
+        GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[0].AmmoPrefab);
+        float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
+        if (projectile != null)
+        {
+
+            projectile.transform.position = weaponData[0].FirePoint.transform.position;
+            projectile.transform.rotation = weaponData[0].FirePoint.transform.rotation;
+            float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
+            float bulletBaseSpeed = 15; // The base speed of the bullet
+            float currentMoveSpeed = currentSpeed * 1.2f;
+            // Calculate the bullet speed based on the player's speed
+            float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
+
+            // Apply the adjusted speed to the bullet's velocity
+            projectile.GetComponent<Rigidbody>().velocity = weaponData[0].FirePoint.transform.forward * adjustedBulletSpeed;
+        }
+
+
 
     }
 
@@ -144,31 +197,30 @@ public class WeaponSystem : MonoBehaviourPun
         if (Type == WeaponType.miniGun)
         {
 
-            weaponData[1].WeaponPrefab.SetActive(true);
-            weaponData[2].WeaponPrefab.SetActive(false);
+
 
             // Vector3 Temp = new Vector3(target.transform.position.x, 5, target.transform.position.z);
-           
-                Debug.Log(" mini gun firing");
 
-                weaponData[1].nextFireTime = Time.time + weaponData[1].fireRate;
+            Debug.Log(" mini gun firing");
 
-                GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[1].AmmoPrefab);
-                float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
-                if (projectile != null)
-                {
+            weaponData[1].nextFireTime = Time.time + weaponData[1].fireRate;
 
-                    projectile.transform.position = weaponData[1].FirePoint.transform.position;
-                    projectile.transform.rotation = weaponData[1].FirePoint.transform.rotation;
-                    float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
-                    float bulletBaseSpeed = 15; // The base speed of the bullet
-                    float currentMoveSpeed = currentSpeed * 1.2f;
-                    // Calculate the bullet speed based on the player's speed
-                    float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
+            GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[1].AmmoPrefab);
+            float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
+            if (projectile != null)
+            {
 
-                    // Apply the adjusted speed to the bullet's velocity
-                    projectile.GetComponent<Rigidbody>().velocity = weaponData[1].FirePoint.transform.forward * adjustedBulletSpeed;
-                }
+                projectile.transform.position = weaponData[1].FirePoint.transform.position;
+                projectile.transform.rotation = weaponData[1].FirePoint.transform.rotation;
+                float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
+                float bulletBaseSpeed = 15; // The base speed of the bullet
+                float currentMoveSpeed = currentSpeed * 1.2f;
+                // Calculate the bullet speed based on the player's speed
+                float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
+
+                // Apply the adjusted speed to the bullet's velocity
+                projectile.GetComponent<Rigidbody>().velocity = weaponData[1].FirePoint.transform.forward * adjustedBulletSpeed;
+            }
 
 
 
@@ -176,35 +228,34 @@ public class WeaponSystem : MonoBehaviourPun
         }
         else if (Type == WeaponType.DoubleminiGun)
         {
-            weaponData[1].WeaponPrefab.SetActive(true);
-            weaponData[2].WeaponPrefab.SetActive(true);
+
             // Vector3 Temp = new Vector3(target.transform.position.x, 5, target.transform.position.z);
-           
-                Debug.Log("Double mini gun firing");
 
-                weaponData[1].nextFireTime = Time.time + weaponData[1].fireRate;
-                for (int i = 1; i < 3; i++)  //doubleMiniGun element which is 2 and 3 so need to loop through it. Note* dont change the element sequence otherwise u need to rearrange it
+            Debug.Log("Double mini gun firing");
+
+            weaponData[1].nextFireTime = Time.time + weaponData[1].fireRate;
+            for (int i = 1; i < 3; i++)  //doubleMiniGun element which is 2 and 3 so need to loop through it. Note* dont change the element sequence otherwise u need to rearrange it
+            {
+                GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[1].AmmoPrefab);
+                float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
+                if (projectile != null)
                 {
-                    GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[1].AmmoPrefab);
-                    float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
-                    if (projectile != null)
-                    {
 
-                        projectile.transform.position = weaponData[i].FirePoint.transform.position;
-                        projectile.transform.rotation = weaponData[i].FirePoint.transform.rotation;
-                        float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
-                        float bulletBaseSpeed = 15; // The base speed of the bullet
-                        float currentMoveSpeed = currentSpeed * 1.2f;
-                        // Calculate the bullet speed based on the player's speed
-                        float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
+                    projectile.transform.position = weaponData[i].FirePoint.transform.position;
+                    projectile.transform.rotation = weaponData[i].FirePoint.transform.rotation;
+                    float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
+                    float bulletBaseSpeed = 15; // The base speed of the bullet
+                    float currentMoveSpeed = currentSpeed * 1.2f;
+                    // Calculate the bullet speed based on the player's speed
+                    float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
 
-                        // Apply the adjusted speed to the bullet's velocity
-                        projectile.GetComponent<Rigidbody>().velocity = weaponData[i].FirePoint.transform.forward * adjustedBulletSpeed;
-                    }
-
+                    // Apply the adjusted speed to the bullet's velocity
+                    projectile.GetComponent<Rigidbody>().velocity = weaponData[i].FirePoint.transform.forward * adjustedBulletSpeed;
                 }
 
-           
+            }
+
+
         }
 
 
@@ -213,7 +264,7 @@ public class WeaponSystem : MonoBehaviourPun
     [PunRPC]
     private void RocketLauncherWeapon()
     {
-        weaponData[3].WeaponPrefab.SetActive(true);
+
 
 
         GameObject Target = FindTarget();
@@ -311,7 +362,10 @@ public class WeaponSystem : MonoBehaviourPun
 
     #endregion
 
-   
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 }
 
 

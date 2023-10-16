@@ -38,8 +38,11 @@ MonoBehaviour:
   - MiniGunWeapon
   - RocketLauncherWeapon
   - TurretWeapon
-  - EnableOverNetworkRPC
+  - DisableWeaponRPC
+  - EnableWeaponRPC
+  - WeaponTypeSnicRPC
   - DisablePowerOverNetworkRPC
+  - EnableOverNetworkRPC
   - ClickRpc
   - DestroyRpc
   - DestroySpaceship

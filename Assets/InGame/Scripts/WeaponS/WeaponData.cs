@@ -11,7 +11,7 @@ public class WeaponData
     public GameObject FirePoint;
     public GameObject AmmoPrefab;
     public GameObject WeaponPrefab;
-
+    public float WeaponTime = 10;
 
     public float nextFireTime = 0f;
 
