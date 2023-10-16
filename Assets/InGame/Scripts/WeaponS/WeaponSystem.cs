@@ -70,35 +70,7 @@ public class WeaponSystem : MonoBehaviourPun
 
 
 
-    private void DisableObjectAfterTime(int WeaponIndex, int WeaponIndex2 =0)
-    {
-        if (countdownTime > 0)
-        {
-            countdownTime -= Time.deltaTime;
-            if (countdownText != null)
-            {
-                countdownText.text = "Time left: " + countdownTime.ToString("F1"); // Display with one decimal place
-            }
-        }
-        else
-        {
-            if (countdownText != null)
-            {
-                countdownText.text = "Time left: 0";
-            }
-
-            // Disable the GameObject when the countdown reaches zero
-            DisableWeapon(WeaponIndex);
-
-            if (WeaponIndex2 != 0)
-            {
-                DisableWeapon(WeaponIndex2);
-            }
-
-            isCountingDown = false;
-            Type = WeaponType.SimpleGun;
-        }
-    }
+    
 
 
     #region LogicForWeaponAttack
@@ -120,10 +92,10 @@ public class WeaponSystem : MonoBehaviourPun
                 {
                     EnableWeapon(1);
                     DisableWeapon(2);
+                    countdownTime = 0; // just to be sure
                     countdownTime = weaponData[1].WeaponTime;
                     isCountingDown = true;
                    
-
                 }
                 DisableObjectAfterTime(1);
                 if (Input.GetMouseButton(0) && Time.time >= weaponData[1].nextFireTime)
@@ -134,9 +106,9 @@ public class WeaponSystem : MonoBehaviourPun
             case WeaponType.DoubleminiGun:
                 if (!isCountingDown)
                 {
-                  
                     EnableWeapon(2);
                     EnableWeapon(1);
+                    countdownTime = 0;
                     countdownTime = weaponData[2].WeaponTime;
                     isCountingDown = true;
                   
@@ -148,14 +120,51 @@ public class WeaponSystem : MonoBehaviourPun
                 }
                 break;
             case WeaponType.Rocketlauncher:
+                if (!isCountingDown)
+                {
+                    EnableWeapon(3);
+                    countdownTime = 0;
+                    countdownTime = weaponData[3].WeaponTime;
+                    isCountingDown = true;
 
-                EnableWeapon(3);
-              //  StartCoroutine(DisableObjectAfterTime(3, weaponData[3].WeaponTime));
+                }
+                DisableObjectAfterTime(3);
+            
                 if (Input.GetMouseButtonDown(0) && Time.time >= weaponData[3].nextFireTime)
                 {
                     view.RPC("RocketLauncherWeapon", RpcTarget.All);
                 }
                 break;
+        }
+    }
+
+    private void DisableObjectAfterTime(int WeaponIndex, int WeaponIndex2 = 0)
+    {
+        if (countdownTime > 0)
+        {
+            countdownTime -= Time.deltaTime;
+            if (countdownText != null)
+            {
+                countdownText.text = "Time left: " + Mathf.Floor(countdownTime).ToString();// Display with one decimal place
+            }
+        }
+        else
+        {
+            if (countdownText != null)
+            {
+                countdownText.text = "Time left: 0";
+            }
+
+            // Disable the GameObject when the countdown reaches zero
+            DisableWeapon(WeaponIndex);
+
+            if (WeaponIndex2 != 0)
+            {
+                DisableWeapon(WeaponIndex2);
+            }
+
+            isCountingDown = false;
+            Type = WeaponType.SimpleGun;
         }
     }
 
