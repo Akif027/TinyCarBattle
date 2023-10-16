@@ -1,11 +1,7 @@
 using Photon.Pun;
-using Photon.Pun.Demo.Asteroids;
-using Photon.Realtime;
-using System.Collections;
-using System.Collections.Generic;
 using Tarodev;
 using UnityEngine;
-using UnityEngine.Pool;
+
 
 public class WeaponSystem : MonoBehaviourPun
 {
@@ -56,12 +52,13 @@ public class WeaponSystem : MonoBehaviourPun
         if (view.IsMine)
         {
          
-         ChangeWeaponOnType();
+          ChangeWeaponOnType();
           
         }
 
     }
 
+    #region LogicForWeaponAttack
 
     private void ChangeWeaponOnType()
     {
@@ -76,18 +73,29 @@ public class WeaponSystem : MonoBehaviourPun
                 }
                 break;
             case WeaponType.miniGun:
+
+                EnableWeapon(1);
+                DisableWeapon(2);
+
                 if (Input.GetMouseButton(0) && Time.time >= weaponData[1].nextFireTime)
                 {
                     view.RPC("MiniGunWeapon", RpcTarget.All);
                 }
                 break;
             case WeaponType.DoubleminiGun:
+
+                EnableWeapon(2);
+                EnableWeapon(1);
+
                 if (Input.GetMouseButton(0) && Time.time >= weaponData[1].nextFireTime)
                 {
                     view.RPC("MiniGunWeapon", RpcTarget.All);
                 }
                 break;
             case WeaponType.Rocketlauncher:
+        
+                EnableWeapon(3);
+
                 if (Input.GetMouseButtonDown(0) && Time.time >= weaponData[3].nextFireTime) 
                 { 
                     view.RPC("RocketLauncherWeapon", RpcTarget.All);
@@ -202,49 +210,48 @@ public class WeaponSystem : MonoBehaviourPun
 
     }
 
-
     [PunRPC]
     private void RocketLauncherWeapon()
     {
         weaponData[3].WeaponPrefab.SetActive(true);
 
-     
-            GameObject Target = FindTarget();
-            Debug.Log("Rocket firing");
 
-            weaponData[3].nextFireTime = Time.time + weaponData[3].fireRate;
+        GameObject Target = FindTarget();
+        Debug.Log("Rocket firing");
 
-            GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[3].AmmoPrefab);
-            Missile missile = projectile.GetComponent<Missile>();
-            float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
-            if (projectile != null)
+        weaponData[3].nextFireTime = Time.time + weaponData[3].fireRate;
+
+        GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[3].AmmoPrefab);
+        Missile missile = projectile.GetComponent<Missile>();
+        float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
+        if (projectile != null)
+        {
+            // logic for getting the target 
+            if (Target != null)
             {
-                // logic for getting the target 
-                if (Target != null)
-                {
 
-                    missile.enabled = true;
-                    missile._target = Target.GetComponent<Target>();
-                }
-                else
-                {
-                    Debug.Log("No Target Found");
-                }
-                float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
-                float bulletBaseSpeed = 15; // The base speed of the bullet
-                float currentMoveSpeed = currentSpeed * 1.2f;
-                // Calculate the bullet speed based on the player's speed
-                float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
-                projectile.transform.position = weaponData[3].FirePoint.transform.position;
-                projectile.transform.rotation = weaponData[3].FirePoint.transform.rotation;
-                projectile.GetComponent<Rigidbody>().velocity = weaponData[3].FirePoint.transform.forward * adjustedBulletSpeed;
-
-
+                missile.enabled = true;
+                missile._target = Target.GetComponent<Target>();
             }
+            else
+            {
+                Debug.Log("No Target Found");
+            }
+            float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
+            float bulletBaseSpeed = 15; // The base speed of the bullet
+            float currentMoveSpeed = currentSpeed * 1.2f;
+            // Calculate the bullet speed based on the player's speed
+            float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
+            projectile.transform.position = weaponData[3].FirePoint.transform.position;
+            projectile.transform.rotation = weaponData[3].FirePoint.transform.rotation;
+            projectile.GetComponent<Rigidbody>().velocity = weaponData[3].FirePoint.transform.forward * adjustedBulletSpeed;
+
+
+        }
 
 
 
-      
+
 
     }
 
@@ -269,12 +276,42 @@ public class WeaponSystem : MonoBehaviourPun
 
         if (nearestEnemy != null)
         {
-            
+
             Debug.Log("Nearest enemy position: " + nearestEnemy.position);
         }
 
         return nearEnemy;
     }
+
+    #endregion
+
+
+    #region DisbaleOrEnableWeapon
+    private void EnableWeapon(int I)
+    {
+        view.RPC("EnableWeaponRPC", RpcTarget.All, I);
+    }
+
+    private void DisableWeapon(int I)
+    {
+        view.RPC("DisableWeaponRPC", RpcTarget.All, I);
+    }
+
+    [PunRPC]
+    private void EnableWeaponRPC(int I)
+    {
+        weaponData[I].WeaponPrefab.SetActive(true);
+    }
+
+    [PunRPC]
+    private void DisableWeaponRPC(int I)
+    {
+        weaponData[I].WeaponPrefab.SetActive(false);
+    }
+
+    #endregion
+
+   
 }
 
 

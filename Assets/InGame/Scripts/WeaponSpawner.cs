@@ -12,6 +12,14 @@ public class WeaponSpawner : MonoBehaviour
         if (!PhotonNetwork.IsMasterClient)
             return;
 
+        SpawnWeapon();
+
+
+    }
+
+
+    private void SpawnWeapon()
+    {
         if (weapons.Count == 0)
         {
             Debug.LogError("No weapons in the list.");

@@ -7,7 +7,7 @@ public class CheckCollision : MonoBehaviour
 {
 
     private WeaponSystem Ws;
-  
+   
     private void Start()
     {
         Ws =GetComponent<WeaponSystem>();
@@ -16,7 +16,8 @@ public class CheckCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
+        if (!GetComponent<PhotonView>().IsMine)
+            return;
        
             if (other.CompareTag("SimpleGun"))
             {
