@@ -1199,9 +1199,9 @@ MonoBehaviour:
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
     SynchronizeEnabled: 1
-    InterpolateOption: 1
+    InterpolateOption: 2
     InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 10
+    InterpolateLerpSpeed: 40
   m_ScaleModel:
     SynchronizeEnabled: 0
     InterpolateOption: 0
@@ -1236,7 +1236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
-  detectionRadius: 10
+  detectionRadius: 50
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0

@@ -19,7 +19,7 @@ MonoBehaviour:
     AppIdVoice: 
     AppVersion: 1.0
     UseNameServer: 1
-    FixedRegion: 
+    FixedRegion: in
     Server: 
     Port: 0
     ProxyServer: 
@@ -38,7 +38,8 @@ MonoBehaviour:
   - MiniGunWeapon
   - RocketLauncherWeapon
   - TurretWeapon
-  - DisableOverNetwork
+  - EnableOverNetworkRPC
+  - DisablePowerOverNetworkRPC
   - ClickRpc
   - DestroyRpc
   - DestroySpaceship

@@ -7,12 +7,11 @@ public class CheckCollision : MonoBehaviour
 {
 
     private WeaponSystem Ws;
-    PhotonView view;
-    GameObject Target = null;
+  
     private void Start()
     {
         Ws =GetComponent<WeaponSystem>();
-        view = GetComponent<PhotonView>();
+     
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,10 +21,10 @@ public class CheckCollision : MonoBehaviour
             if (other.CompareTag("SimpleGun"))
             {
                 Ws.Type = WeaponType.SimpleGun;
-                Target = other.gameObject;
               
-              Debug.Log("collected " + Target.name);
-              view.RPC("DisableOverNetwork", RpcTarget.All);
+              
+              Debug.Log("collected " + other.name);
+            
 
             }
 
@@ -33,36 +32,29 @@ public class CheckCollision : MonoBehaviour
             {
                 Ws.Type = WeaponType.miniGun;
 
-                Target = other.gameObject;
-            Debug.Log("collected " + Target.name);
-            view.RPC("DisableOverNetwork", RpcTarget.All);
+              
+            Debug.Log("collected " + other.name);
+     
             }
 
             if (other.CompareTag("Rocketlauncher"))
             {
                 Ws.Type = WeaponType.Rocketlauncher;
-                Target = other.gameObject;
-            Debug.Log("collected " + Target.name);
-            view.RPC("DisableOverNetwork", RpcTarget.All);
+              
+            Debug.Log("collected " + other.name);
+        
 
             }
             if (other.CompareTag("DoubleminiGun"))
             {
                 Ws.Type = WeaponType.DoubleminiGun;
-                Target = other.gameObject;
-                view.RPC("DisableOverNetwork", RpcTarget.All);
+             
                 Debug.Log("DoubleMiniGun collected");
             }
   
       
     }
 
-    [PunRPC]
-    private void DisableOverNetwork()
-    {
 
-        Target.SetActive(false);
-        Debug.Log("disable");
-        Target = null;
-    }
+
 }

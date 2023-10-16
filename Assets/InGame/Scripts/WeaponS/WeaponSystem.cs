@@ -17,7 +17,7 @@ public class WeaponSystem : MonoBehaviourPun
     [Header("HomingMissle")]
     public float detectionRadius = 10f;
     public LayerMask enemyLayer;
-    private ObjectPool projectilePool;
+
     public WeaponData[] weaponData = new WeaponData[3];
 
    
@@ -75,14 +75,23 @@ public class WeaponSystem : MonoBehaviourPun
 
                 }
                 break;
-            case WeaponType.miniGun :
-                view.RPC("MiniGunWeapon", RpcTarget.All);
+            case WeaponType.miniGun:
+                if (Input.GetMouseButton(0) && Time.time >= weaponData[1].nextFireTime)
+                {
+                    view.RPC("MiniGunWeapon", RpcTarget.All);
+                }
                 break;
             case WeaponType.DoubleminiGun:
-                view.RPC("MiniGunWeapon", RpcTarget.All);
+                if (Input.GetMouseButton(0) && Time.time >= weaponData[1].nextFireTime)
+                {
+                    view.RPC("MiniGunWeapon", RpcTarget.All);
+                }
                 break;
             case WeaponType.Rocketlauncher:
-                view.RPC("RocketLauncherWeapon", RpcTarget.All);
+                if (Input.GetMouseButtonDown(0) && Time.time >= weaponData[3].nextFireTime) 
+                { 
+                    view.RPC("RocketLauncherWeapon", RpcTarget.All);
+                }
                 break;
         }
     }
@@ -131,8 +140,7 @@ public class WeaponSystem : MonoBehaviourPun
             weaponData[2].WeaponPrefab.SetActive(false);
 
             // Vector3 Temp = new Vector3(target.transform.position.x, 5, target.transform.position.z);
-            if (Input.GetMouseButton(0) && Time.time >= weaponData[1].nextFireTime)
-            {
+           
                 Debug.Log(" mini gun firing");
 
                 weaponData[1].nextFireTime = Time.time + weaponData[1].fireRate;
@@ -156,7 +164,6 @@ public class WeaponSystem : MonoBehaviourPun
 
 
 
-            }
 
         }
         else if (Type == WeaponType.DoubleminiGun)
@@ -164,8 +171,7 @@ public class WeaponSystem : MonoBehaviourPun
             weaponData[1].WeaponPrefab.SetActive(true);
             weaponData[2].WeaponPrefab.SetActive(true);
             // Vector3 Temp = new Vector3(target.transform.position.x, 5, target.transform.position.z);
-            if (Input.GetMouseButton(0) && Time.time >= weaponData[1].nextFireTime)
-            {
+           
                 Debug.Log("Double mini gun firing");
 
                 weaponData[1].nextFireTime = Time.time + weaponData[1].fireRate;
@@ -190,7 +196,7 @@ public class WeaponSystem : MonoBehaviourPun
 
                 }
 
-            }
+           
         }
 
 
@@ -202,8 +208,7 @@ public class WeaponSystem : MonoBehaviourPun
     {
         weaponData[3].WeaponPrefab.SetActive(true);
 
-        if (Input.GetMouseButtonDown(0) && Time.time >= weaponData[3].nextFireTime)
-        {
+     
             GameObject Target = FindTarget();
             Debug.Log("Rocket firing");
 
@@ -239,7 +244,7 @@ public class WeaponSystem : MonoBehaviourPun
 
 
 
-        }
+      
 
     }
 

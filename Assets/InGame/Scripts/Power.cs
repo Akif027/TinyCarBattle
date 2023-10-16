@@ -1,3 +1,5 @@
+using Newtonsoft.Json.Bson;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +13,12 @@ public class Power : MonoBehaviour
     private float initialY;
     private float time;
 
+    PhotonView view;
+
+
     void Start()
     {
+        view = GetComponent<PhotonView>();  
         // Store the initial Y position of the GameObject
         initialY = transform.position.y;
     }
@@ -28,5 +34,42 @@ public class Power : MonoBehaviour
         Vector3 newPosition = transform.position;
         newPosition.y = initialY + Mathf.Sin(time) * amplitude;
         transform.position = newPosition;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+
+        if (other.CompareTag("Player"))
+        {
+         
+            view.RPC("DisablePowerOverNetworkRPC", RpcTarget.All);
+
+        }
+
+
+    }
+
+    public void EnableOverTheNetwork()
+    {
+        view.RPC("EnableOverNetworkRPC", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    private void EnableOverNetworkRPC()
+    {
+
+       gameObject.SetActive(true);
+        Debug.Log("Enable");
+
+    }
+
+    [PunRPC]
+    private void DisablePowerOverNetworkRPC()
+    {
+
+       gameObject.SetActive(false);
+        Debug.Log("disable");
+    
     }
 }
