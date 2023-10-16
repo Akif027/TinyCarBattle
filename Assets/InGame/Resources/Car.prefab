@@ -1280,6 +1280,7 @@ MonoBehaviour:
     WeaponTime: 15
     nextFireTime: 0
     fireRate: 0
+  rotationSpeed: 5
 --- !u!114 &-4459368853435011680
 MonoBehaviour:
   m_ObjectHideFlags: 0

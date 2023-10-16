@@ -28,6 +28,9 @@ public class WeaponSystem : MonoBehaviourPun
     public bool isCountingDown = false;//for weapon
     public WeaponData[] weaponData = new WeaponData[3];
 
+    public float rotationSpeed = 5.0f;
+
+    private float rotationX = 0;
 
 
     private void Awake()
@@ -70,12 +73,21 @@ public class WeaponSystem : MonoBehaviourPun
         {
 
             ChangeWeaponOnType();
-         
+
+            // rotation 
+            float mouseX = Input.GetAxis("Mouse X");
+
+            // Calculate the new rotation angle based on mouse input
+            rotationX += mouseX * rotationSpeed;
+
+            // Apply the rotation to the GameObject (only on the Y-axis)
+            weaponData[0].WeaponPrefab.transform.rotation = Quaternion.Euler(0, rotationX, 0);
+
         }
 
     }
 
-
+    
     #region LogicForWeaponAttack
 
     private void ChangeWeaponOnType()
@@ -178,7 +190,7 @@ public class WeaponSystem : MonoBehaviourPun
     private void SimpleGunWeapon()
     {
 
-        // Vector3 Temp = new Vector3(target.transform.position.x, 5, target.transform.position.z);
+      
 
         Debug.Log("gun firing");
 
