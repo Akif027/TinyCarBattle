@@ -10,6 +10,7 @@ TagManager:
   - Rocketlauncher
   - DoubleminiGun
   - Target
+  - ShieldLevel4
   layers:
   - Default
   - TransparentFX

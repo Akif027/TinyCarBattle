@@ -17,10 +17,17 @@ public class WeaponSystem : MonoBehaviourPun
     [Header("HomingMissle")]
     public float detectionRadius = 10f;
     public LayerMask enemyLayer;
+
+    [Header("Shields ")]
+    public GameObject shield;
+
+    [Header("Weapon Setting")]
     [SerializeField] Text countdownText; // this Text is for weaponTimeTextDisplay
     public float countdownTime = 10.0f; // Adjust this time as needed
-    public bool isCountingDown = false;
+    [HideInInspector]
+    public bool isCountingDown = false;//for weapon
     public WeaponData[] weaponData = new WeaponData[3];
+
 
 
     private void Awake()
@@ -67,10 +74,6 @@ public class WeaponSystem : MonoBehaviourPun
         }
 
     }
-
-
-
-    
 
 
     #region LogicForWeaponAttack
@@ -128,7 +131,7 @@ public class WeaponSystem : MonoBehaviourPun
                     isCountingDown = true;
 
                 }
-                DisableObjectAfterTime(3);
+                DisableObjectAfterTime(3,2,1);
             
                 if (Input.GetMouseButtonDown(0) && Time.time >= weaponData[3].nextFireTime)
                 {
@@ -138,7 +141,7 @@ public class WeaponSystem : MonoBehaviourPun
         }
     }
 
-    private void DisableObjectAfterTime(int WeaponIndex, int WeaponIndex2 = 0)
+    private void DisableObjectAfterTime(int WeaponIndex, int WeaponIndex2 = 0 , int WeaponIndex3 = 0)
     {
         if (countdownTime > 0)
         {
@@ -162,7 +165,10 @@ public class WeaponSystem : MonoBehaviourPun
             {
                 DisableWeapon(WeaponIndex2);
             }
-
+            if (WeaponIndex3 != 0)
+            {
+                DisableWeapon(WeaponIndex3);
+            }
             isCountingDown = false;
             Type = WeaponType.SimpleGun;
         }
@@ -347,12 +353,12 @@ public class WeaponSystem : MonoBehaviourPun
 
 
     #region DisbaleOrEnableWeapon
-    private void EnableWeapon(int I)
+    public void EnableWeapon(int I)
     {
         view.RPC("EnableWeaponRPC", RpcTarget.All, I);
     }
 
-    private void DisableWeapon(int I)
+    public void DisableWeapon(int I)
     {
         view.RPC("DisableWeaponRPC", RpcTarget.All, I);
     }

@@ -66,7 +66,10 @@ public class CheckCollision : MonoBehaviour
             view.RPC("WeaponTypeSnicRPC", RpcTarget.All, WeaponType.DoubleminiGun);
             Debug.Log("DoubleMiniGun collected");
         }
-
+        if (other.CompareTag("ShieldLevel4"))
+        {
+            Ws.EnableWeapon(4);
+        }
 
     }
 
