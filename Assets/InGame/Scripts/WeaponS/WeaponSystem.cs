@@ -18,8 +18,7 @@ public class WeaponSystem : MonoBehaviourPun
     public float detectionRadius = 10f;
     public LayerMask enemyLayer;
 
-    [Header("Shields ")]
-    public GameObject shield;
+
 
     [Header("Weapon Setting")]
     [SerializeField] Text countdownText; // this Text is for weaponTimeTextDisplay
@@ -67,6 +66,8 @@ public class WeaponSystem : MonoBehaviourPun
 
     }
 
+   
+
     private void Update()
     {
         if (view.IsMine)
@@ -74,20 +75,29 @@ public class WeaponSystem : MonoBehaviourPun
 
             ChangeWeaponOnType();
 
-            // rotation 
+            //Rotation for SimpleGun
             float mouseX = Input.GetAxis("Mouse X");
-
-            // Calculate the new rotation angle based on mouse input
             rotationX += mouseX * rotationSpeed;
+            rotationX = Mathf.Clamp(rotationX, -90.0f, 90.0f); // Optional: Clamp rotationX within a range.
 
-            // Apply the rotation to the GameObject (only on the Y-axis)
-            weaponData[0].WeaponPrefab.transform.rotation = Quaternion.Euler(0, rotationX, 0);
+            // Apply the rotation to the GameObject (only on the Y-axis).
+            weaponData[0].WeaponPrefab.transform.localRotation = Quaternion.Euler(0, rotationX, 0);
 
+            // Send the rotation change to other players using an RPC.
+            photonView.RPC("SyncRotationRPC", RpcTarget.Others, rotationX);
         }
+      
 
     }
 
-    
+    [PunRPC]
+    private void SyncRotationRPC(float newRotationX)
+    {
+        // This RPC is called for other players. Synchronize their view.
+        rotationX = newRotationX;
+        weaponData[0].WeaponPrefab.transform.localRotation = Quaternion.Euler(0, rotationX, 0);
+    }
+
     #region LogicForWeaponAttack
 
     private void ChangeWeaponOnType()
@@ -189,8 +199,8 @@ public class WeaponSystem : MonoBehaviourPun
     [PunRPC]
     private void SimpleGunWeapon()
     {
+     
 
-      
 
         Debug.Log("gun firing");
 

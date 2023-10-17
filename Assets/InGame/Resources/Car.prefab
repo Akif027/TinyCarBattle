@@ -1171,6 +1171,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 1362500960329701572}
   - {fileID: 1362500960329701573}
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1240,7 +1241,6 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
-  shield: {fileID: 0}
   countdownText: {fileID: 0}
   countdownTime: 10
   isCountingDown: 0
