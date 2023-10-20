@@ -13,11 +13,9 @@ public class IsMine : MonoBehaviour
     {
         view = GetComponent<PhotonView>();
 
-        if (view.IsMine)
+        if (!view.IsMine)
         {
-            Camera = transform.GetChild(5
-                
-                ).gameObject;
+           
             Camera.SetActive(false);
         }
     }

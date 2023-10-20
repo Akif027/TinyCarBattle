@@ -19,15 +19,10 @@ public class SpawnPlayer : MonoBehaviour
 
 
         Playerindex = PlayerPrefs.GetInt("ShipIndex");
-    }
-
-    private void Start()
-    {
 
         Vector2 randomPos = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
         PhotonNetwork.Instantiate(Player.name, randomPos, Quaternion.identity);
 
-
-
     }
+
 }

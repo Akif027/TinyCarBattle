@@ -33,19 +33,17 @@ public class WeaponSystem : MonoBehaviourPun
 
     private void Awake()
     {
-        countdownText = UImanager.instance.countdownText;
-    }
-    private void Start()
-    {
+     
         view = GetComponent<PhotonView>();
 
         Type = WeaponType.SimpleGun;
-       
-      enemyLayer = LayerMask.GetMask("Enemy");
+
+        enemyLayer = LayerMask.GetMask("Enemy");
 
         for (int i = 1; i < weaponData.Length; i++) //disable the weapon at start execpt the simple gun 
         {
             weaponData[i].WeaponPrefab.SetActive(false);
+
         }
 
 
@@ -62,10 +60,13 @@ public class WeaponSystem : MonoBehaviourPun
         {
             Debug.LogError("Layer " + "Player" + " does not exist.");
         }
-
     }
 
-   
+    private void Start()
+    {
+        countdownText = UImanager.instance.countdownText;
+    }
+
 
     private void Update()
     {

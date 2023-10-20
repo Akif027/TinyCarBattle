@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Photon.Pun;
 [Serializable]
 public class MSACC_CameraType {
 	[Tooltip("A camera must be associated with this variable. The camera that is associated here, will receive the settings of this index.")]
@@ -11,6 +12,7 @@ public class MSACC_CameraType {
 	public TipoRotac rotationType = TipoRotac.LookAtThePlayer;
 	[Range(0.01f,1.0f)][Tooltip("Here you must adjust the volume that the camera attached to this element can perceive. In this way, each camera can perceive a different volume.")]
 	public float volume = 1.0f;
+
 }
 [Serializable]
 public class MSACC_CameraSetting {
@@ -326,8 +328,8 @@ public class MSCameraController : MonoBehaviour {
 	public bool _enableMobileInputs;
 	[HideInInspector]
 	public int _mobileInputsIndex; // 0 = off,   1 = all,   2 = scroll buttons only
-
-	void OnValidate (){
+   [SerializeField] PhotonView view;
+    void OnValidate (){
         //clamp CameraIndex
         startCameraIndex = Mathf.Clamp(startCameraIndex, 0, (cameras.Length - 1));
 
@@ -411,8 +413,12 @@ public class MSCameraController : MonoBehaviour {
     }
 
     void Awake(){
-      
+        view = GetComponentInParent<PhotonView>();
 
+		if (!view.IsMine )
+		{
+			gameObject.SetActive(false);
+		}
         if (target) {
 			targetTransform = target;
 		} else {
@@ -545,6 +551,7 @@ public class MSCameraController : MonoBehaviour {
 		lastIndex = startCameraIndex;
 		_enableMobileInputs = false;
 		EnableCameras (index);
+
 	}
 
 	void EnableCameras (int index){
