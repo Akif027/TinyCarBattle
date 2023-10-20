@@ -7,6 +7,9 @@ public class UImanager : MonoBehaviour
 {
    public Text countdownText;
     public static UImanager instance;
+
+    public Slider healthSlider;
+
     private void Awake()
     {
         instance = this;

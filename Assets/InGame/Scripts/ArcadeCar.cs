@@ -2,8 +2,6 @@
 using UnityEngine;
 using System.Collections;
 using Photon.Pun;
-
-
 public class ArcadeCar : MonoBehaviour
 {
     
@@ -93,6 +91,7 @@ public class ArcadeCar : MonoBehaviour
 
     void Start()
     {
+       
         view = GetComponent<PhotonView>();
         if (view.IsMine)
         {
@@ -369,10 +368,12 @@ public class ArcadeCar : MonoBehaviour
 
     void Update()
     {
-
+        if (view.IsMine)
+        {
+           
             ApplyVisual();
-    
-      
+        }
+
 
     }
 
@@ -839,7 +840,7 @@ public class ArcadeCar : MonoBehaviour
         float suspCurrentLen = Mathf.Clamp01(1.0f - data.compression) * axle.lengthRelaxed;
 
         pos = wsAttachPoint + wsDownDirection * suspCurrentLen;
-
+    
         float additionalYaw = 0.0f;
         float additionalMul = Mathf.Rad2Deg;
         if (wheelIndex == WHEEL_LEFT_INDEX)
@@ -850,6 +851,8 @@ public class ArcadeCar : MonoBehaviour
 
         Quaternion localWheelRot = Quaternion.Euler(new Vector3(data.visualRotationRad * additionalMul, additionalYaw + data.yawRad * Mathf.Rad2Deg, 0.0f));
         rot = transform.rotation * localWheelRot;
+        float a = additionalYaw + data.yawRad * Mathf.Rad2Deg;
+     
     }
 
     void CalculateWheelRotationFromSpeed(Axle axle, WheelData data, Vector3 wsPos)
@@ -878,7 +881,13 @@ public class ArcadeCar : MonoBehaviour
         float deltaRot = Mathf.PI * 2.0f * rps * Time.deltaTime;
 
         data.visualRotationRad += deltaRot;
+     
+            // If this is the local player, send the updated rotation to others
+         
+      
     }
+
+ 
 
     void ApplyVisual()
     {
@@ -897,35 +906,44 @@ public class ArcadeCar : MonoBehaviour
 
             Vector3 wsPos;
             Quaternion wsRot;
+            Vector3 wsScale;
 
             if (axle.wheelVisualLeft != null)
             {
                 CalculateWheelVisualTransform(wsL, wsDownDirection, axle, axle.wheelDataL, WHEEL_LEFT_INDEX, axle.wheelDataL.visualRotationRad, out wsPos, out wsRot);
+             
                 axle.wheelVisualLeft.transform.position = wsPos;
                 axle.wheelVisualLeft.transform.rotation = wsRot;
-                axle.wheelVisualLeft.transform.localScale = new Vector3(axle.radius, axle.radius, axle.radius) * axle.visualScale;
+
+                wsScale = new Vector3(axle.radius, axle.radius, axle.radius) * axle.visualScale;
+                axle.wheelVisualLeft.transform.localScale = wsScale;
 
                 if (!isBrake)
                 {
                     CalculateWheelRotationFromSpeed(axle, axle.wheelDataL, wsPos);
                 }
+
+                // If this is the local player, send the updated rotation to others
+           
             }
 
             if (axle.wheelVisualRight != null)
             {
                 CalculateWheelVisualTransform(wsR, wsDownDirection, axle, axle.wheelDataR, WHEEL_RIGHT_INDEX, axle.wheelDataR.visualRotationRad, out wsPos, out wsRot);
+
                 axle.wheelVisualRight.transform.position = wsPos;
                 axle.wheelVisualRight.transform.rotation = wsRot;
-                axle.wheelVisualRight.transform.localScale = new Vector3(axle.radius, axle.radius, axle.radius) * axle.visualScale;
+
+                wsScale = new Vector3(axle.radius, axle.radius, axle.radius) * axle.visualScale;
+                axle.wheelVisualRight.transform.localScale = wsScale;
 
                 if (!isBrake)
                 {
                     CalculateWheelRotationFromSpeed(axle, axle.wheelDataR, wsPos);
                 }
+
+             
             }
-
-            //visualRotationRad
-
         }
 
     }

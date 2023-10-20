@@ -8,10 +8,12 @@ public class CheckCollision : MonoBehaviour
 {
 
     private WeaponSystem Ws;
-    PhotonView view;
+    private PlayerHealth P_health;
+  [SerializeField]  PhotonView view;
     private void Start()
     {
         Ws = GetComponent<WeaponSystem>();
+        P_health = GetComponent<PlayerHealth>();
         view = GetComponent<PhotonView>();
     }
 
@@ -72,6 +74,18 @@ public class CheckCollision : MonoBehaviour
         }
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!view.IsMine)
+            return;
+
+        if (collision.collider.tag=="Bullet")
+        {
+            P_health.TakeDamageRPC(2);
+        }
+    }
+
 
     [PunRPC]
     private void WeaponTypeSnicRPC(WeaponType type)

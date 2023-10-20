@@ -23,12 +23,11 @@ public class WeaponSystem : MonoBehaviourPun
     [Header("Weapon Setting")]
     [SerializeField] Text countdownText; // this Text is for weaponTimeTextDisplay
     public float countdownTime = 10.0f; // Adjust this time as needed
+
     [HideInInspector]
     public bool isCountingDown = false;//for weapon
     public WeaponData[] weaponData = new WeaponData[3];
-
     public float rotationSpeed = 5.0f;
-
     private float rotationX = 0;
 
 

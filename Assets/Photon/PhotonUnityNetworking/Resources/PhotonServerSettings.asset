@@ -43,13 +43,13 @@ MonoBehaviour:
   - WeaponTypeSnicRPC
   - DisablePowerOverNetworkRPC
   - EnableOverNetworkRPC
-  - SyncsimpleGunRotationRPC
+  - SyncRotationRPC
+  - OnPlayerDieRPC
   - ClickRpc
   - DestroyRpc
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
-  - SyncRotationRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

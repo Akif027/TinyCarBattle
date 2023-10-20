@@ -11,6 +11,7 @@ TagManager:
   - DoubleminiGun
   - Target
   - ShieldLevel4
+  - Bullet
   layers:
   - Default
   - TransparentFX

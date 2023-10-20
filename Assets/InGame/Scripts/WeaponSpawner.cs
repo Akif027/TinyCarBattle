@@ -30,7 +30,7 @@ public class WeaponSpawner : MonoBehaviour
         {
             Vector3 randomPos = new Vector3(
                 Random.Range(minX, maxX),
-                1f, // Set the Y-coordinate to zero
+                2f, // Set the Y-coordinate to zero
                 Random.Range(minZ, maxZ)
             );
 
