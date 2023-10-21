@@ -9,20 +9,21 @@ public class SpawnPlayer : MonoBehaviour
 
 
 
-    int Playerindex = 0;
-   // public List<ShipDataScriptable> Ships = new List<ShipDataScriptable>();
-   public GameObject Player;
-    public float minX, maxX, minY, maxY;
+    public GameObject playerPrefab;
+    public Transform[] waypoints;
 
     private void Awake()
     {
+        if (waypoints.Length == 0)
+        {
+            Debug.LogError("No waypoints assigned!");
+            return;
+        }
 
-
-        Playerindex = PlayerPrefs.GetInt("ShipIndex");
-
-        Vector2 randomPos = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
-        PhotonNetwork.Instantiate(Player.name, randomPos, Quaternion.identity);
-
+        // Instantiate players at each waypoint
+        for (int i = 0; i < Mathf.Min(waypoints.Length, PhotonNetwork.CurrentRoom.PlayerCount); i++)
+        {
+            PhotonNetwork.Instantiate(playerPrefab.name, waypoints[i].position, waypoints[i].rotation);
+        }
     }
-
 }

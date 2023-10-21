@@ -18,7 +18,7 @@ public class ArcadeCar : MonoBehaviour
     [Header("PUN")]
 
     [SerializeField] PhotonView view;
-
+    public TrailRenderer[] Tyremarks;
 
 
     [Header("Engine")]
@@ -372,11 +372,35 @@ public class ArcadeCar : MonoBehaviour
         {
            
             ApplyVisual();
+
+
+            if (isHandBrake)
+            {
+                skidEmmiter(true);
+
+                AudioManger.instance.Play("Drift");
+
+            }
+            else
+            {
+                AudioManger.instance.Stop("Drift");
+                skidEmmiter(false);
+            }
         }
 
 
+
+
+     
     }
 
+    private void skidEmmiter(bool t)
+    {
+        foreach (TrailRenderer T in Tyremarks)
+        {
+            T.emitting = t;
+        }
+    }
     void FixedUpdate()
     {
         if (view.IsMine)
