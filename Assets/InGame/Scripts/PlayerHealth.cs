@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -11,13 +12,23 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth = 100.0f;
     public float currentHealth = 100.0f;
     public float damageRate = 10.0f; // Rate at which health decreases after taking damage.
-
+  
     private bool isTakingDamage = false;
 
     PhotonView view;
     private void Start()
     {
         view = GetComponent<PhotonView>();
+       
+        if (view.IsMine)
+        {
+
+            UImanager.instance.NameText.text = PhotonNetwork.NickName;
+        }
+        else
+        {
+            UImanager.instance.NameText.text = view.Owner.NickName;
+        }
         // Set the initial health and max value of the slider.
         currentHealth = maxHealth;
        UImanager.instance.healthSlider.maxValue = maxHealth;

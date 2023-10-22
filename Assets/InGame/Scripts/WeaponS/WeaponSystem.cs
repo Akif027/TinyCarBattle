@@ -3,6 +3,7 @@ using Photon.Pun.UtilityScripts;
 using System;
 using System.Collections;
 using Tarodev;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +22,7 @@ public class WeaponSystem : MonoBehaviourPun
 
 
     [Header("Weapon Setting")]
-    [SerializeField] Text countdownText; // this Text is for weaponTimeTextDisplay
+    [SerializeField] TMP_Text countdownText; // this Text is for weaponTimeTextDisplay
     public float countdownTime = 10.0f; // Adjust this time as needed
 
     [HideInInspector]
@@ -64,7 +65,7 @@ public class WeaponSystem : MonoBehaviourPun
 
     private void Start()
     {
-        countdownText = UImanager.instance.countdownText;
+        countdownText = UImanager.instance.WeaponcountdownText;
     }
 
 
@@ -167,22 +168,23 @@ public class WeaponSystem : MonoBehaviourPun
     {
         if (countdownTime > 0)
         {
+            countdownText.gameObject.SetActive(true);
             countdownTime -= Time.deltaTime;
             if (countdownText != null)
             {
-                countdownText.text = "Time left: " + Mathf.Floor(countdownTime).ToString();// Display with one decimal place
+                countdownText.text = "Weapon Time left: " + Mathf.Floor(countdownTime).ToString();// Display with one decimal place
             }
         }
         else
         {
             if (countdownText != null)
             {
-                countdownText.text = "Time left: 0";
+                countdownText.text = "Weapon Time left: 0";
             }
 
             // Disable the GameObject when the countdown reaches zero
             DisableWeapon(WeaponIndex);
-
+            countdownText.gameObject.SetActive(false);
             if (WeaponIndex2 != 0)
             {
                 DisableWeapon(WeaponIndex2);

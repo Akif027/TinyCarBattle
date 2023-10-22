@@ -11231,6 +11231,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -39
       objectReference: {fileID: 0}
+    - target: {fileID: 5294214586307569000, guid: d8e1f218912714fb49eae883f1916235, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294214586307569000, guid: d8e1f218912714fb49eae883f1916235, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294214586307569000, guid: d8e1f218912714fb49eae883f1916235, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1119215408}
+    - target: {fileID: 5294214586307569000, guid: d8e1f218912714fb49eae883f1916235, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294214586307569000, guid: d8e1f218912714fb49eae883f1916235, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeName
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294214586307569000, guid: d8e1f218912714fb49eae883f1916235, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294214586307569000, guid: d8e1f218912714fb49eae883f1916235, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5294214586307569002, guid: d8e1f218912714fb49eae883f1916235, type: 3}
       propertyPath: m_Name
       value: Name
@@ -11618,6 +11646,10 @@ PrefabInstance:
     - target: {fileID: 3906510126293325073, guid: 6fdedcf2c7fe547679865aec3cb5d9b3, type: 3}
       propertyPath: m_fontSize
       value: 103.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3906510126293325073, guid: 6fdedcf2c7fe547679865aec3cb5d9b3, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3906510126293325073, guid: 6fdedcf2c7fe547679865aec3cb5d9b3, type: 3}
       propertyPath: m_fontSizeBase
@@ -13251,9 +13283,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 335663663}
-  - {fileID: 4805641961879700568}
   - {fileID: 4684072182719911599}
   - {fileID: 4434157131538174}
+  - {fileID: 4805641961879700568}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 475.089, z: 0}
@@ -16556,9 +16588,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShowCase4
       objectReference: {fileID: 0}
+    - target: {fileID: 7261206723112997872, guid: 154634042a0b7f041a0d8064295b057d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7264502744271374526, guid: 154634042a0b7f041a0d8064295b057d, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7264502744271374526, guid: 154634042a0b7f041a0d8064295b057d, type: 3}
       propertyPath: m_LocalScale.x
@@ -16623,7 +16659,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8644163303965384424, guid: 7f877b507a54c294aa09a1426e875631, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8644163303965384424, guid: 7f877b507a54c294aa09a1426e875631, type: 3}
       propertyPath: m_LocalScale.x
@@ -16681,6 +16717,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShowCase3
       objectReference: {fileID: 0}
+    - target: {fileID: 8646158882271252874, guid: 7f877b507a54c294aa09a1426e875631, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f877b507a54c294aa09a1426e875631, type: 3}
 --- !u!4 &4684072182719911599 stripped
@@ -16714,9 +16754,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShowCase2
       objectReference: {fileID: 0}
+    - target: {fileID: 6243043637095764354, guid: c7ceb85c5a083f54fb3f4a03d5d78b0a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6245219333853132524, guid: c7ceb85c5a083f54fb3f4a03d5d78b0a, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6245219333853132524, guid: c7ceb85c5a083f54fb3f4a03d5d78b0a, type: 3}
       propertyPath: m_LocalScale.x

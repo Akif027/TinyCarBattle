@@ -8,7 +8,7 @@ public class Carsdata : ScriptableObject
     [SerializeField] int CarPrice;
     [SerializeField] string CarName;
     [SerializeField] GameObject CarType;
-    [SerializeField] GameObject LobbyCars;
+   
 
     public string _carName
     {
@@ -25,11 +25,11 @@ public class Carsdata : ScriptableObject
 
 
 
-    public GameObject LobbyCar
+/*    public GameObject LobbyCar
     {
         get { return LobbyCars; }
         set { LobbyCar = value; }
     }
-
+*/
 
 }

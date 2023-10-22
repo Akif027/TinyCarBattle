@@ -87,7 +87,7 @@ public class ArcadeCar : MonoBehaviour
     RaycastHit[] wheelRayHits = new RaycastHit[16];
 
 
-
+  
 
     void Start()
     {
@@ -95,10 +95,11 @@ public class ArcadeCar : MonoBehaviour
         view = GetComponent<PhotonView>();
         if (view.IsMine)
         {
-           
+          
             style.normal.textColor = Color.red;
 
             rb = GetComponent<Rigidbody>();
+          
             rb.centerOfMass = centerOfMass;
 
 
@@ -403,11 +404,14 @@ public class ArcadeCar : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (view.IsMine)
+        if (view.IsMine )
         {
-            UpdateInput();
+            if (GameManager.gameStarted)
+            {
+                UpdateInput();
+            }
 
-            accelerationForceMagnitude = CalcAccelerationForceMagnitude();
+                accelerationForceMagnitude = CalcAccelerationForceMagnitude();
 
             // 0.8 - pressed
             // 1.0 - not pressed

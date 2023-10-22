@@ -72,10 +72,7 @@ public class CarSelection : MonoBehaviour
         PlayerPrefs.SetInt("CarIndex", currentCarIndex);
     }
 
-    private void OnEnable()
-    {
-        PlayerPrefs.DeleteAll();
-    }
+  
 
     IEnumerator RotateOverTime(float duration)
     {
