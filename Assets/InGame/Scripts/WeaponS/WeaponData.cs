@@ -12,7 +12,8 @@ public class WeaponData
     public GameObject AmmoPrefab;
     public GameObject WeaponPrefab;
     public float WeaponTime = 10;
-
+    public float speedofBullet = 1.2f;
+    [HideInInspector]
     public float nextFireTime = 0f;
 
     public float fireRate = 0.5f;

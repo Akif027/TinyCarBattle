@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class CarEnginesound : MonoBehaviour
 {
     public AudioSource engineAudioSource;
@@ -13,9 +13,13 @@ public class CarEnginesound : MonoBehaviour
     public float volumeMultiplier = 0.1f;
 
     private bool engineStarted = false;
+    PhotonView view;
 
     private void Start()
     {
+        view =GetComponentInParent<PhotonView>();
+        if (!view.IsMine)
+            return;
         StartCoroutine(PlayStartupSoundAndSwitchToEngine());
     }
 
@@ -35,7 +39,7 @@ public class CarEnginesound : MonoBehaviour
 
     private void Update()
     {
-        if (engineStarted)
+        if (engineStarted && view.IsMine)
         {
             float currentSpeed = carRigidbody.velocity.magnitude;
             float pitch = Mathf.Lerp(1.0f, 2.0f, (currentSpeed - minSpeed) / (maxSpeed - minSpeed));

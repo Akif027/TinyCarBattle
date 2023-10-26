@@ -886,7 +886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!20 &229552824
 Camera:
   m_ObjectHideFlags: 0
@@ -1682,7 +1682,7 @@ PrefabInstance:
     - target: {fileID: 7459764252922927685, guid: 9144d8e84a2dc2b4ba9cc54ed5ee5bc1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8a303dbc6b59bd24c968de13117e6be3, type: 2}
+      objectReference: {fileID: 2100000, guid: be0c58165df26d34095650d9beb772db, type: 2}
     - target: {fileID: 7459764252922927704, guid: 9144d8e84a2dc2b4ba9cc54ed5ee5bc1, type: 3}
       propertyPath: m_Name
       value: Ramp (1)
@@ -2101,7 +2101,7 @@ PrefabInstance:
     - target: {fileID: 630619419814703032, guid: 6554f0549909839439885330a9e4cd79, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8a303dbc6b59bd24c968de13117e6be3, type: 2}
+      objectReference: {fileID: 2100000, guid: be0c58165df26d34095650d9beb772db, type: 2}
     - target: {fileID: 630619419814703038, guid: 6554f0549909839439885330a9e4cd79, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5239,7 +5239,7 @@ PrefabInstance:
     - target: {fileID: 2300006, guid: 10bf48ac20bb9403c999fd27807daa54, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1c0cfa8c05ed3ff488832c5b3392eda1, type: 2}
+      objectReference: {fileID: 2100000, guid: fb0ff76c6974fee4cb399df2059b25bf, type: 2}
     - target: {fileID: 2300006, guid: 10bf48ac20bb9403c999fd27807daa54, type: 3}
       propertyPath: m_Materials.Array.data[4]
       value: 
@@ -6418,7 +6418,7 @@ PrefabInstance:
     - target: {fileID: 630619419814703032, guid: 6554f0549909839439885330a9e4cd79, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8a303dbc6b59bd24c968de13117e6be3, type: 2}
+      objectReference: {fileID: 2100000, guid: be0c58165df26d34095650d9beb772db, type: 2}
     - target: {fileID: 630619419814703038, guid: 6554f0549909839439885330a9e4cd79, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -6817,7 +6817,7 @@ PrefabInstance:
     - target: {fileID: 630619419814703032, guid: 6554f0549909839439885330a9e4cd79, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8a303dbc6b59bd24c968de13117e6be3, type: 2}
+      objectReference: {fileID: 2100000, guid: be0c58165df26d34095650d9beb772db, type: 2}
     - target: {fileID: 630619419814703038, guid: 6554f0549909839439885330a9e4cd79, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -7169,7 +7169,7 @@ PrefabInstance:
     - target: {fileID: 630619419814703032, guid: 6554f0549909839439885330a9e4cd79, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8a303dbc6b59bd24c968de13117e6be3, type: 2}
+      objectReference: {fileID: 2100000, guid: be0c58165df26d34095650d9beb772db, type: 2}
     - target: {fileID: 630619419814703038, guid: 6554f0549909839439885330a9e4cd79, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -7896,7 +7896,7 @@ PrefabInstance:
     - target: {fileID: 7459764252922927685, guid: 9144d8e84a2dc2b4ba9cc54ed5ee5bc1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8a303dbc6b59bd24c968de13117e6be3, type: 2}
+      objectReference: {fileID: 2100000, guid: be0c58165df26d34095650d9beb772db, type: 2}
     - target: {fileID: 7459764252922927704, guid: 9144d8e84a2dc2b4ba9cc54ed5ee5bc1, type: 3}
       propertyPath: m_Name
       value: Ramp

@@ -227,8 +227,8 @@ public class WeaponSystem : MonoBehaviourPun
             projectile.transform.position = weaponData[0].FirePoint.transform.position;
             projectile.transform.rotation = weaponData[0].FirePoint.transform.rotation;
             float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
-            float bulletBaseSpeed = 15; // The base speed of the bullet
-            float currentMoveSpeed = currentSpeed * 1.8f;
+            float bulletBaseSpeed = weaponData[0].speedofBullet; // The base speed of the bullet
+            float currentMoveSpeed = currentSpeed;
             // Calculate the bullet speed based on the player's speed
             float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
 
@@ -264,8 +264,8 @@ public class WeaponSystem : MonoBehaviourPun
                 projectile.transform.position = weaponData[1].FirePoint.transform.position;
                 projectile.transform.rotation = weaponData[1].FirePoint.transform.rotation;
                 float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
-                float bulletBaseSpeed = 15; // The base speed of the bullet
-                float currentMoveSpeed = currentSpeed * 1.2f;
+                float bulletBaseSpeed = weaponData[1].speedofBullet; // The base speed of the bullet
+                float currentMoveSpeed = currentSpeed ;
                 // Calculate the bullet speed based on the player's speed
                 float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
 
@@ -296,8 +296,8 @@ public class WeaponSystem : MonoBehaviourPun
                     projectile.transform.position = weaponData[i].FirePoint.transform.position;
                     projectile.transform.rotation = weaponData[i].FirePoint.transform.rotation;
                     float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
-                    float bulletBaseSpeed = 15; // The base speed of the bullet
-                    float currentMoveSpeed = currentSpeed * 1.2f;
+                    float bulletBaseSpeed = weaponData[2].speedofBullet; // The base speed of the bullet
+                    float currentMoveSpeed = currentSpeed;
                     // Calculate the bullet speed based on the player's speed
                     float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
 
@@ -341,8 +341,8 @@ public class WeaponSystem : MonoBehaviourPun
                 Debug.Log("No Target Found");
             }
             float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
-            float bulletBaseSpeed = 15; // The base speed of the bullet
-            float currentMoveSpeed = currentSpeed * 1.2f;
+            float bulletBaseSpeed = weaponData[3].speedofBullet; // The base speed of the bullet
+            float currentMoveSpeed = currentSpeed;
             // Calculate the bullet speed based on the player's speed
             float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
             projectile.transform.position = weaponData[3].FirePoint.transform.position;

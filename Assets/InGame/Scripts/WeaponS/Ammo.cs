@@ -59,9 +59,10 @@ public class Ammo : MonoBehaviour
            
                PH.OtherPlayerHealth = otherPlayerH;
 
-          
-
-        }
+             
+            gameObject.SetActive(false);
+           }
+     
     }
 
 
