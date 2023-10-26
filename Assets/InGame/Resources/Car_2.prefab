@@ -1289,7 +1289,7 @@ MonoBehaviour:
     AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
     WeaponPrefab: {fileID: 3400550120608594212}
     WeaponTime: 15
-    speedofBullet: 1.2
+    speedofBullet: 50
     nextFireTime: 0
     fireRate: 0.5
   - Name: Minigun
@@ -1297,7 +1297,7 @@ MonoBehaviour:
     AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
     WeaponPrefab: {fileID: 2416415914974569048}
     WeaponTime: 15
-    speedofBullet: 1.2
+    speedofBullet: 60
     nextFireTime: 0
     fireRate: 0.2
   - Name: DoubleMiniGun
@@ -1305,7 +1305,7 @@ MonoBehaviour:
     AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
     WeaponPrefab: {fileID: 2416415915464376477}
     WeaponTime: 15
-    speedofBullet: 1.2
+    speedofBullet: 60
     nextFireTime: 0
     fireRate: 0.2
   - Name: missile
@@ -1313,7 +1313,7 @@ MonoBehaviour:
     AmmoPrefab: {fileID: 4349954651744972842, guid: e4399ca1e45073c4abd6795c55320ce6, type: 3}
     WeaponPrefab: {fileID: 2416415914314433376}
     WeaponTime: 15
-    speedofBullet: 1.2
+    speedofBullet: 60
     nextFireTime: 0
     fireRate: 1
   - Name: ShieldLevel4

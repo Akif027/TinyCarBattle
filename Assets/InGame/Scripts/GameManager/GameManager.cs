@@ -12,11 +12,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static bool gameStarted =false;
     public static bool gameFinished=false;
     [SerializeField] float GameTimeLimit = 10;
-    private float timer = 0f; // GameTime
 
-    
+    private int minutes = 0;
+    private float seconds = 0f;
+
+    //  PhotonView view;
     void Start()
     {
+      //  view = GetComponent<PhotonView>();
         PhotonNetwork.AutomaticallySyncScene = true;
 
         // Check the number of players when the first player joins
@@ -32,32 +35,31 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (gameStarted)
+       
+        if (gameStarted && !gameFinished )
         {
-            if (timer >= 1f)
+            // Update the timer
+            seconds += Time.deltaTime;
+
+            // Check if one second has passed
+            if (seconds >= 1f)
             {
-
-                UImanager.instance.gameTimeText.text = Mathf.FloorToInt(timer).ToString();
-
+                seconds -= 1f; // Reduce seconds by 1
+                minutes += 1; // Increase minutes by 1
             }
-            float elapsedTime = Time.time - timer;
 
-            // Calculate minutes and seconds
-            int minutes = Mathf.FloorToInt(elapsedTime / 60);
-            int seconds = Mathf.FloorToInt(elapsedTime % 60);
-        
-            // Update the timer text
-            UImanager.instance.gameTimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-            if (elapsedTime >= GameTimeLimit)
+            // Update the UI
+            UImanager.instance.gameTimeText.text = string.Format("{0:00}:{1:00}", minutes, Mathf.FloorToInt(seconds));
+
+            // Check if the game time limit is reached
+            if (minutes >= GameTimeLimit)
             {
                 gameFinished = true;
+                // You might want to add some code to handle the game finishing.
             }
-
-
-         
         }
-       
     }
+
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         // Check the number of players whenever a new player joins
