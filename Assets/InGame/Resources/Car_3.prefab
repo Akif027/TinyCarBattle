@@ -421,7 +421,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4625370757702190941}
   - component: {fileID: 4625370757702190928}
-  - component: {fileID: 4625370757702190931}
   - component: {fileID: 4625370757702190930}
   m_Layer: 0
   m_Name: Camera
@@ -488,14 +487,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4625370757702190931
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4625370757702190940}
-  m_Enabled: 1
 --- !u!114 &4625370757702190930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1691,6 +1682,8 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   damageRate: 10
+  killCount: 0
+  EneemyPview: {fileID: 0}
 --- !u!1 &5969535966374383952
 GameObject:
   m_ObjectHideFlags: 0

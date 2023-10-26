@@ -128,3 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableDelay: 1
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  damageAmount: 20

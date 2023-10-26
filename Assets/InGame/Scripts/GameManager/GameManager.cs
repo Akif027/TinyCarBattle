@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static bool gameFinished=false;
     [SerializeField] float GameTimeLimit = 10;
     private float timer = 0f; // GameTime
+
+    
     void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -50,6 +52,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 gameFinished = true;
             }
+
+
+         
         }
        
     }

@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Pun.Demo.Asteroids;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,12 +9,12 @@ public class CheckCollision : MonoBehaviour
 {
 
     private WeaponSystem Ws;
-    private PlayerHealth P_health;
+ private PlayerHealth P_health;
   [SerializeField]  PhotonView view;
     private void Start()
     {
         Ws = GetComponent<WeaponSystem>();
-        P_health = GetComponent<PlayerHealth>();
+      P_health = GetComponent<PlayerHealth>();
         view = GetComponent<PhotonView>();
     }
 
@@ -80,10 +81,15 @@ public class CheckCollision : MonoBehaviour
         if (!view.IsMine)
             return;
 
-        if (collision.collider.tag=="Bullet")
+        if (collision.collider.tag == "Bullet")
         {
-            P_health.TakeDamageRPC(2);
+
+            P_health.TakeDamage(10);
+
         }
+
+
+
     }
 
 

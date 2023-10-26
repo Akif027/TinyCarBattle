@@ -14,9 +14,9 @@ public class UImanager : MonoBehaviourPunCallbacks
     public TMP_Text gameStartCountDownTxt;
     public TMP_Text NameText;
     public TMP_Text gameTimeText;
-
+    public TMP_Text killText;
     public Slider healthSlider;
-
+ 
     public GameObject pausePanel;
  
     private void Awake()
@@ -71,4 +71,8 @@ public class UImanager : MonoBehaviourPunCallbacks
     {
         pausePanel.SetActive(true);
     }
+
+
+
+
 }

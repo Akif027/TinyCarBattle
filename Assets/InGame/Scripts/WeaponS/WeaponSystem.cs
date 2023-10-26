@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Pun.Demo.Asteroids;
 using Photon.Pun.UtilityScripts;
 using System;
 using System.Collections;
@@ -18,7 +19,7 @@ public class WeaponSystem : MonoBehaviourPun
     [Header("HomingMissle")]
     public float detectionRadius = 10f;
     public LayerMask enemyLayer;
-
+    
 
 
     [Header("Weapon Setting")]
@@ -30,17 +31,21 @@ public class WeaponSystem : MonoBehaviourPun
     public WeaponData[] weaponData = new WeaponData[3];
     public float rotationSpeed = 5.0f;
     private float rotationX = 0;
+    private float rotationY = 0;
 
 
-    private void Awake()
+
+    private void Start()
     {
-     
         view = GetComponent<PhotonView>();
 
         Type = WeaponType.SimpleGun;
 
         enemyLayer = LayerMask.GetMask("Enemy");
+      
+      
 
+   
         for (int i = 1; i < weaponData.Length; i++) //disable the weapon at start execpt the simple gun 
         {
             weaponData[i].WeaponPrefab.SetActive(false);
@@ -48,9 +53,12 @@ public class WeaponSystem : MonoBehaviourPun
         }
 
 
+        countdownText = UImanager.instance.WeaponcountdownText;
 
+        //setting tag and layer based on local Player
         int targetLayer = view.IsMine ? LayerMask.NameToLayer("Player") : LayerMask.NameToLayer("Enemy");
-
+        string SetTag = view.IsMine ? "Player" : "Enemy";
+        gameObject.tag = SetTag;
         // Check if the layer exists before setting it
         if (targetLayer != -1)
         {
@@ -63,11 +71,6 @@ public class WeaponSystem : MonoBehaviourPun
         }
     }
 
-    private void Start()
-    {
-        countdownText = UImanager.instance.WeaponcountdownText;
-    }
-
 
     private void Update()
     {
@@ -75,30 +78,37 @@ public class WeaponSystem : MonoBehaviourPun
         {
 
             ChangeWeaponOnType();
-
-            //Rotation for SimpleGun
+            // Rotation for SimpleGun
             float mouseX = Input.GetAxis("Mouse X");
-            rotationX += mouseX * rotationSpeed;
-            rotationX = Mathf.Clamp(rotationX, -90.0f, 90.0f); // Optional: Clamp rotationX within a range.
+            float mouseY = Input.GetAxis("Mouse Y");
 
-            // Apply the rotation to the GameObject (only on the Y-axis).
-            weaponData[0].WeaponPrefab.transform.localRotation = Quaternion.Euler(0, rotationX, 0);
+            // Adjust the rotation speed based on your preference
+         
+            rotationX -= mouseY * rotationSpeed;
+            rotationX = Mathf.Clamp(rotationX, -2.0f, 10.0f);
+
+            rotationY += mouseX * rotationSpeed;
+            rotationY = Mathf.Clamp(rotationY, -90.0f, 90.0f);
+
+            // Create a Quaternion for rotationX and rotationY
+            Quaternion newRotation = Quaternion.Euler(rotationX, rotationY, 0);
+
+            Transform TurretTop = weaponData[0].WeaponPrefab.transform.GetChild(0).GetChild(1).transform;
+            // Apply the rotation to the GameObject (both on the X-axis and Y-axis).
+            TurretTop.localRotation = newRotation;
 
             // Send the rotation change to other players using an RPC.
-            photonView.RPC("SyncRotationRPC", RpcTarget.Others, rotationX);
+            photonView.RPC("SyncRotationRPC", RpcTarget.Others, newRotation);
         }
-      
-
     }
 
     [PunRPC]
-    private void SyncRotationRPC(float newRotationX)
+    private void SyncRotationRPC(Quaternion newRotation)
     {
+        Transform TurretTop = weaponData[0].WeaponPrefab.transform.GetChild(0).GetChild(1).transform;
         // This RPC is called for other players. Synchronize their view.
-        rotationX = newRotationX;
-        weaponData[0].WeaponPrefab.transform.localRotation = Quaternion.Euler(0, rotationX, 0);
+        TurretTop.localRotation  = newRotation;
     }
-
     #region LogicForWeaponAttack
 
     private void ChangeWeaponOnType()
@@ -209,6 +219,7 @@ public class WeaponSystem : MonoBehaviourPun
         weaponData[0].nextFireTime = Time.time + weaponData[0].fireRate;
 
         GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[0].AmmoPrefab);
+        projectile.GetComponent<Ammo>().setPView(GetComponent<PlayerHealth>());
         float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
         if (projectile != null)
         {
@@ -217,7 +228,7 @@ public class WeaponSystem : MonoBehaviourPun
             projectile.transform.rotation = weaponData[0].FirePoint.transform.rotation;
             float playerSpeedThreshold = 1.0f; // You can adjust this threshold as needed
             float bulletBaseSpeed = 15; // The base speed of the bullet
-            float currentMoveSpeed = currentSpeed * 1.2f;
+            float currentMoveSpeed = currentSpeed * 1.8f;
             // Calculate the bullet speed based on the player's speed
             float adjustedBulletSpeed = bulletBaseSpeed + Mathf.Max(currentMoveSpeed - playerSpeedThreshold, 0);
 
@@ -245,6 +256,7 @@ public class WeaponSystem : MonoBehaviourPun
             weaponData[1].nextFireTime = Time.time + weaponData[1].fireRate;
 
             GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[1].AmmoPrefab);
+            projectile.GetComponent<Ammo>().setPView(GetComponent<PlayerHealth>());
             float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
             if (projectile != null)
             {
@@ -276,6 +288,7 @@ public class WeaponSystem : MonoBehaviourPun
             for (int i = 1; i < 3; i++)  //doubleMiniGun element which is 2 and 3 so need to loop through it. Note* dont change the element sequence otherwise u need to rearrange it
             {
                 GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[1].AmmoPrefab);
+                projectile.GetComponent<Ammo>().setPView(GetComponent<PlayerHealth>());
                 float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
                 if (projectile != null)
                 {

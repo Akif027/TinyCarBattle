@@ -411,14 +411,18 @@ public class MSCameraController : MonoBehaviour {
             Gizmos.DrawLine(topRightCorner, topRightCornerUP);
         }
     }
-
+    private void OnEnable()
+    {
+           GetComponent<AudioListener>().enabled = false;
+    }
     void Awake(){
         view = GetComponentInParent<PhotonView>();
-
+	
 		if (!view.IsMine )
 		{
 			gameObject.SetActive(false);
-		}
+         
+        }
         if (target) {
 			targetTransform = target;
 		} else {

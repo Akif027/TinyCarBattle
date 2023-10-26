@@ -12,6 +12,7 @@ TagManager:
   - Target
   - ShieldLevel4
   - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
