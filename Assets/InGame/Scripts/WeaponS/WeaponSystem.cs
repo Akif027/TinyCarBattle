@@ -219,6 +219,7 @@ public class WeaponSystem : MonoBehaviourPun
         weaponData[0].nextFireTime = Time.time + weaponData[0].fireRate;
 
         GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[0].AmmoPrefab);
+        weaponData[0].MuzzleFlash.Play();
         projectile.GetComponent<Ammo>().setPView(GetComponent<PlayerHealth>());
         float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
         if (projectile != null)

@@ -11,7 +11,7 @@ public class Ammo : MonoBehaviour
 
     private PlayerHealth PH;
 
-    private SphereCollider boxCollider;
+    private BoxCollider boxCollider;
 
     public void setPView(PlayerHealth p)
     {
@@ -20,7 +20,7 @@ public class Ammo : MonoBehaviour
     }
     private void OnEnable()
     {
-        boxCollider = GetComponent<SphereCollider>();
+        boxCollider = GetComponent<BoxCollider>();
         boxCollider.enabled = false;
         StartCoroutine(DisableAfterDelay());
         StartCoroutine(EsablethisScript());
@@ -62,7 +62,7 @@ public class Ammo : MonoBehaviour
              
             gameObject.SetActive(false);
            }
-     
+        gameObject.SetActive(false);
     }
 
 

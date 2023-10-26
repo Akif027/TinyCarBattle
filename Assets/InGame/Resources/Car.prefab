@@ -1828,26 +1828,29 @@ MonoBehaviour:
   weaponData:
   - Name: simpleGun
     FirePoint: {fileID: 3767372468630490462}
-    AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
+    AmmoPrefab: {fileID: 5098669131629843924, guid: 5ab721a414d24974cad65889f1814794, type: 3}
     WeaponPrefab: {fileID: 1061155343974116104}
     WeaponTime: 15
     speedofBullet: 50
+    MuzzleFlash: {fileID: 5590766663902535045}
     nextFireTime: 0
     fireRate: 0.5
   - Name: Minigun
     FirePoint: {fileID: 232658862}
-    AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
+    AmmoPrefab: {fileID: 5098669131629843924, guid: 5ab721a414d24974cad65889f1814794, type: 3}
     WeaponPrefab: {fileID: 1265905780}
     WeaponTime: 15
     speedofBullet: 20
+    MuzzleFlash: {fileID: 0}
     nextFireTime: 0
     fireRate: 0.2
   - Name: DoubleMiniGun
     FirePoint: {fileID: 1731923661}
-    AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
+    AmmoPrefab: {fileID: 5098669131629843924, guid: 5ab721a414d24974cad65889f1814794, type: 3}
     WeaponPrefab: {fileID: 1946555057}
     WeaponTime: 15
     speedofBullet: 50
+    MuzzleFlash: {fileID: 0}
     nextFireTime: 0
     fireRate: 0.2
   - Name: missile
@@ -1856,6 +1859,7 @@ MonoBehaviour:
     WeaponPrefab: {fileID: 814534988}
     WeaponTime: 15
     speedofBullet: 5
+    MuzzleFlash: {fileID: 0}
     nextFireTime: 0
     fireRate: 1
   - Name: ShieldLevel4
@@ -1864,6 +1868,7 @@ MonoBehaviour:
     WeaponPrefab: {fileID: 3672795577987376561}
     WeaponTime: 15
     speedofBullet: 1.2
+    MuzzleFlash: {fileID: 0}
     nextFireTime: 0
     fireRate: 0
   rotationSpeed: 5
@@ -2536,6 +2541,7 @@ Transform:
   m_Children:
   - {fileID: 7513432307475621727}
   - {fileID: 1536341757513356516}
+  - {fileID: 5590766663902535043}
   m_Father: {fileID: 7513432307475621723}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2882,6 +2888,129 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: bfbba37a49a0ccd4ea772ba1417ec63a, type: 3}
   m_PrefabInstance: {fileID: 710963518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1242988435
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 373267987359294895}
+    m_Modifications:
+    - target: {fileID: 695050251726208959, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662480940193, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6666666
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6666666
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.027
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.15599991
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.368
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9995722
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.029246882
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 3.352
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024721, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: m_Name
+      value: Gun Muzzle Flash
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024726, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024726, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024726, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: InitialModule.startSizeY.scalar
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024726, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: InitialModule.startSizeZ.scalar
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024726, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024726, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: InitialModule.startSizeY.minScalar
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766662998024726, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: InitialModule.startSizeZ.minScalar
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590766664081475947, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+--- !u!4 &5590766663902535043 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5590766662998024720, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+  m_PrefabInstance: {fileID: 1242988435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5590766663902535045 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5590766662998024726, guid: b0e15994f850d4e4091f506383ca7462, type: 3}
+  m_PrefabInstance: {fileID: 1242988435}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1487871936
 PrefabInstance:

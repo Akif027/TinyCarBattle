@@ -5782,7 +5782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b04db7641861f488419601d0534d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
+  BulletPrefab: {fileID: 5098669131629843924, guid: 5ab721a414d24974cad65889f1814794, type: 3}
   MissilePrefab: {fileID: 4349954651744972842, guid: e4399ca1e45073c4abd6795c55320ce6, type: 3}
   bulletAmount: 10
   MissileAmount: 5

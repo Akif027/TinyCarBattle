@@ -1286,7 +1286,7 @@ MonoBehaviour:
   weaponData:
   - Name: simpleGun
     FirePoint: {fileID: 1567446409246039922}
-    AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
+    AmmoPrefab: {fileID: 5098669131629843924, guid: 5ab721a414d24974cad65889f1814794, type: 3}
     WeaponPrefab: {fileID: 3400550120608594212}
     WeaponTime: 15
     speedofBullet: 50
@@ -1294,7 +1294,7 @@ MonoBehaviour:
     fireRate: 0.5
   - Name: Minigun
     FirePoint: {fileID: 2416415913990604162}
-    AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
+    AmmoPrefab: {fileID: 5098669131629843924, guid: 5ab721a414d24974cad65889f1814794, type: 3}
     WeaponPrefab: {fileID: 2416415914974569048}
     WeaponTime: 15
     speedofBullet: 60
@@ -1302,7 +1302,7 @@ MonoBehaviour:
     fireRate: 0.2
   - Name: DoubleMiniGun
     FirePoint: {fileID: 2416415915716893921}
-    AmmoPrefab: {fileID: 7217588285727068781, guid: 0872524d1e8bae44abdbab3c9ce0cf3d, type: 3}
+    AmmoPrefab: {fileID: 5098669131629843924, guid: 5ab721a414d24974cad65889f1814794, type: 3}
     WeaponPrefab: {fileID: 2416415915464376477}
     WeaponTime: 15
     speedofBullet: 60
