@@ -886,7 +886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &229552824
 Camera:
   m_ObjectHideFlags: 0
@@ -3348,7 +3348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameStartcountdownTime: 5
-  minPlayersToStart: 2
+  minPlayersToStart: 1
   GameTimeLimit: 10
 --- !u!4 &1091930824
 Transform:

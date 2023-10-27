@@ -12,7 +12,7 @@ public class Ammo : MonoBehaviour
     private PlayerHealth PH;
 
     private BoxCollider boxCollider;
-
+    public GameObject bulletImact;
     public void setPView(PlayerHealth p)
     {
         this.PH = p;
@@ -60,8 +60,10 @@ public class Ammo : MonoBehaviour
                PH.OtherPlayerHealth = otherPlayerH;
 
              
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
            }
+        GameObject impact = Instantiate(bulletImact, transform.position, Quaternion.identity);
+        Destroy(impact, 1);
         gameObject.SetActive(false);
     }
 

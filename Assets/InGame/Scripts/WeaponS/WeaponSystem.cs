@@ -74,6 +74,7 @@ public class WeaponSystem : MonoBehaviourPun
 
     private void Update()
     {
+     
         if (view.IsMine)
         {
 
@@ -134,9 +135,13 @@ public class WeaponSystem : MonoBehaviourPun
                    
                 }
                 DisableObjectAfterTime(1);
-                if (Input.GetMouseButton(0) && Time.time >= weaponData[1].nextFireTime)
+                if (Input.GetMouseButton(0) && !weaponData[1].MuzzleFlash.isPlaying && Time.time >= weaponData[1].nextFireTime)
                 {
                     view.RPC("MiniGunWeapon", RpcTarget.All);
+                }
+                else
+                {
+                    weaponData[1].MuzzleFlash.Stop();
                 }
                 break;
             case WeaponType.DoubleminiGun:
@@ -150,9 +155,14 @@ public class WeaponSystem : MonoBehaviourPun
                   
                 }
                 DisableObjectAfterTime(1,2);
-                if (Input.GetMouseButton(0) && Time.time >= weaponData[1].nextFireTime)
+                if (Input.GetMouseButton(0) && !weaponData[2].MuzzleFlash.isPlaying && Time.time >= weaponData[1].nextFireTime)
                 {
                     view.RPC("MiniGunWeapon", RpcTarget.All);
+                }
+                else
+                {
+                    weaponData[1].MuzzleFlash.Stop();
+                    weaponData[2].MuzzleFlash.Stop();
                 }
                 break;
             case WeaponType.Rocketlauncher:
@@ -211,8 +221,8 @@ public class WeaponSystem : MonoBehaviourPun
     [PunRPC]
     private void SimpleGunWeapon()
     {
-     
 
+ 
 
         Debug.Log("gun firing");
 
@@ -247,7 +257,7 @@ public class WeaponSystem : MonoBehaviourPun
 
         if (Type == WeaponType.miniGun)
         {
-
+            weaponData[1].MuzzleFlash.Play();
 
 
             // Vector3 Temp = new Vector3(target.transform.position.x, 5, target.transform.position.z);
@@ -280,7 +290,8 @@ public class WeaponSystem : MonoBehaviourPun
         }
         else if (Type == WeaponType.DoubleminiGun)
         {
-
+            weaponData[1].MuzzleFlash.Play();
+            weaponData[2].MuzzleFlash.Play();
             // Vector3 Temp = new Vector3(target.transform.position.x, 5, target.transform.position.z);
 
             Debug.Log("Double mini gun firing");

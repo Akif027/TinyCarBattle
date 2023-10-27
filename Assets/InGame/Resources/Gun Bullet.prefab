@@ -305,3 +305,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableDelay: 1
+  bulletImact: {fileID: 1350516102807484535, guid: d53814285ad4ded4780c10bd6bb783fd, type: 3}
