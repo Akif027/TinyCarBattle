@@ -1,13 +1,10 @@
 using Photon.Pun;
-using Photon.Pun.Demo.Asteroids;
-using Photon.Pun.UtilityScripts;
-using System;
-using System.Collections;
+
 using Tarodev;
 using TMPro;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class WeaponSystem : MonoBehaviourPun
 {
@@ -33,7 +30,7 @@ public class WeaponSystem : MonoBehaviourPun
     private float rotationX = 0;
     private float rotationY = 0;
 
-
+    CarEnginesound sound;
 
     private void Start()
     {
@@ -42,10 +39,10 @@ public class WeaponSystem : MonoBehaviourPun
         Type = WeaponType.SimpleGun;
 
         enemyLayer = LayerMask.GetMask("Enemy");
-      
-      
 
-   
+
+        sound = GetComponentInChildren<CarEnginesound>();
+
         for (int i = 1; i < weaponData.Length; i++) //disable the weapon at start execpt the simple gun 
         {
             weaponData[i].WeaponPrefab.SetActive(false);
@@ -74,9 +71,10 @@ public class WeaponSystem : MonoBehaviourPun
 
     private void Update()
     {
-     
+
         if (view.IsMine)
         {
+           
 
             ChangeWeaponOnType();
             // Rotation for SimpleGun
@@ -100,6 +98,23 @@ public class WeaponSystem : MonoBehaviourPun
 
             // Send the rotation change to other players using an RPC.
             photonView.RPC("SyncRotationRPC", RpcTarget.Others, newRotation);
+
+
+            if (Type == WeaponType.miniGun || Type == WeaponType.DoubleminiGun)
+            {
+                if (Input.GetMouseButton(0))
+                {
+                     
+
+                    sound.miniGunshots();
+                }
+                else
+                {
+
+                    sound.StopSound("MachineGun");
+                }
+            }
+
         }
     }
 
@@ -121,7 +136,7 @@ public class WeaponSystem : MonoBehaviourPun
                 if (Input.GetMouseButtonDown(0) && Time.time >= weaponData[0].nextFireTime)
                 {
                     view.RPC("SimpleGunWeapon", RpcTarget.All);
-
+                  
                 }
                 break;
             case WeaponType.miniGun:
@@ -137,11 +152,20 @@ public class WeaponSystem : MonoBehaviourPun
                 DisableObjectAfterTime(1);
                 if (Input.GetMouseButton(0) && !weaponData[1].MuzzleFlash.isPlaying && Time.time >= weaponData[1].nextFireTime)
                 {
+                    
+                     //   AudioManger.instance.Play("machineGun");
+                    
+
+
                     view.RPC("MiniGunWeapon", RpcTarget.All);
+
+                 
                 }
                 else
                 {
+                
                     weaponData[1].MuzzleFlash.Stop();
+               //  AudioManger.instance.Stop("machineGun");
                 }
                 break;
             case WeaponType.DoubleminiGun:
@@ -221,8 +245,8 @@ public class WeaponSystem : MonoBehaviourPun
     [PunRPC]
     private void SimpleGunWeapon()
     {
+        sound.SimpleGunshotPlay("GunShot");
 
- 
 
         Debug.Log("gun firing");
 
@@ -338,6 +362,7 @@ public class WeaponSystem : MonoBehaviourPun
 
         GameObject projectile = ObjectPool.Instance.GetPooledObject(weaponData[3].AmmoPrefab);
         Missile missile = projectile.GetComponent<Missile>();
+        missile.setPView(GetComponent<PlayerHealth>());
         float currentSpeed = GetComponent<Rigidbody>().velocity.magnitude;
         if (projectile != null)
         {

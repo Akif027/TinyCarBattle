@@ -26,6 +26,7 @@ namespace Tarodev {
 
        public bool _missileLaunched = false;
 
+        private PlayerHealth PH;
         private void OnEnable()
         {
             StartCoroutine(isLaunched());
@@ -50,7 +51,11 @@ namespace Tarodev {
          
           
         }
+        public void setPView(PlayerHealth p)
+        {
+            this.PH = p;
 
+        }
         IEnumerator isLaunched()
         {
             yield return new WaitForSeconds(0.2f);
@@ -80,21 +85,20 @@ namespace Tarodev {
         private void OnCollisionEnter(Collision collision)
         {
 
-            int targetLayer = LayerMask.NameToLayer("Enemy"); // Replace "YourLayerName" with the target layer name
-            if (collision.gameObject.layer == targetLayer)
+            if (collision.collider.tag == "Enemy")
             {
-                // Instantiate an explosion if the explosion prefab is set
-                if (_explosionPrefab) Instantiate(_explosionPrefab, transform.position, Quaternion.identity); // make it photonInstantiate
 
-                // Call Explode if the colliding object implements IExplode
-                if (collision.transform.TryGetComponent<IExplode>(out var ex)) ex.Explode();
 
-                // Disable the GameObject
-                gameObject.SetActive(false);
-                _missileLaunched = false;
+                PlayerHealth otherPlayerH = collision.gameObject.GetComponent<PlayerHealth>();
+
+                PH.OtherPlayerHealth = otherPlayerH;
+
+
+                //gameObject.SetActive(false);
             }
+            //GameObject impact = Instantiate(bulletImact, transform.position, Quaternion.identity);
+            //Destroy(impact, 1);
             gameObject.SetActive(false);
-            _missileLaunched = false;
         }
 
         private void OnDrawGizmos() {

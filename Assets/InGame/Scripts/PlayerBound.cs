@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerBound : MonoBehaviour
 {
-    public float minX, maxX, minZ, maxZ; // Define the boundaries of the area
+    public AudioSource s;
+/*    public float minX, maxX, minZ, maxZ; // Define the boundaries of the area
 
     void Update()
     {
@@ -18,5 +19,12 @@ public class PlayerBound : MonoBehaviour
 
         // Update the position of the player with the clamped values
         transform.position = new Vector3(clampedX, currentPosition.y, clampedZ);
+    }*/
+
+
+
+    private void Update()
+    {
+    
     }
 }

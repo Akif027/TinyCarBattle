@@ -14,6 +14,7 @@ public class Power : MonoBehaviour
     private float time;
 
     PhotonView view;
+   
 
 
     void Start()
@@ -34,6 +35,9 @@ public class Power : MonoBehaviour
         Vector3 newPosition = transform.position;
         newPosition.y = initialY + Mathf.Sin(time) * amplitude;
         transform.position = newPosition;
+
+
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,26 +47,14 @@ public class Power : MonoBehaviour
         if (other.CompareTag("Player"))
         {
          
-            view.RPC("DisablePowerOverNetworkRPC", RpcTarget.All);
+            view.RPC("DisablePowerOverNetworkRPC", RpcTarget.AllBuffered);
 
         }
-
-
-    }
-
-    public void EnableOverTheNetwork()
-    {
-        view.RPC("EnableOverNetworkRPC", RpcTarget.AllBuffered);
-    }
-
-    [PunRPC]
-    private void EnableOverNetworkRPC()
-    {
-
-       gameObject.SetActive(true);
-        Debug.Log("Enable");
+     
 
     }
+
+
 
     [PunRPC]
     private void DisablePowerOverNetworkRPC()

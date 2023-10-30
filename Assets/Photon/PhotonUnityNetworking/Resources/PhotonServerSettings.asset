@@ -34,24 +34,29 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
-  - SimpleGunWeapon
-  - MiniGunWeapon
-  - RocketLauncherWeapon
-  - TurretWeapon
-  - DisableWeaponRPC
-  - EnableWeaponRPC
-  - WeaponTypeSnicRPC
   - DisablePowerOverNetworkRPC
+  - DisableWeaponRPC
   - EnableOverNetworkRPC
-  - SyncRotationRPC
+  - EnableWeaponRPC
+  - MiniGunWeapon
   - OnPlayerDieRPC
-  - increasekillCount
   - OnPlayerEnable
+  - RocketLauncherWeapon
+  - SimpleGunWeapon
+  - SyncRotationRPC
+  - WeaponTypeSnicRPC
   - ClickRpc
   - DestroyRpc
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - AddOccupiedWaypointRPC
+  - PlayCarCollisionSoundRPC
+  - PlayBasicSound
+  - PlayCollsionSoundRPC
+  - PlaySimpleSoundRPC
+  - StopSound
+  - StopSoundRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

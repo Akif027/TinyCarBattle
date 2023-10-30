@@ -1,7 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 namespace Tarodev {
-    public class Target : MonoBehaviour, IExplode {
+    public class Target : MonoBehaviour {
         [SerializeField] private Rigidbody _rb;
       
     /*    [SerializeField] private float _size = 10;
@@ -18,6 +18,6 @@ namespace Tarodev {
             _rb.velocity = Rb.velocity;
         }
 
-        public void Explode() => Destroy(gameObject);
+       
     }
 }

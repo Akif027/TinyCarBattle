@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         while (currentTime > 0)
         {
+            AudioManger.instance.Play("TextCountDown");
             // Display the current countdown time in the UI Text
             UImanager.instance.gameStartCountDownTxt.text = currentTime.ToString("0");
 

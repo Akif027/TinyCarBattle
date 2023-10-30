@@ -23,8 +23,8 @@ public class PlayerHealth : MonoBehaviour
 
     private PhotonView view;
 
- 
-
+    Vector3 StartPostion;
+    public GameObject ExplosionVFX;
   
     public bool isPlayerAlive
     {
@@ -66,14 +66,13 @@ public class PlayerHealth : MonoBehaviour
     {
 
         view = GetComponent<PhotonView>();
-        if (!view.IsMine)
-            return;
+      
 
-         view.RPC("OnPlayerEnable", RpcTarget.AllBuffered);
+       
     }
     private void Start()
     {
-      
+        StartPostion = transform.position;
 
         if (view.IsMine)
         {
@@ -132,7 +131,13 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
+    GameObject Eploxion =null; // Imact VFX
+    private void OnDisable()
+    {
 
+     Eploxion =  PhotonNetwork.Instantiate(ExplosionVFX.name, transform.position,transform.rotation);
+    
+    }
 
     private void ApplyDamageDirectly(float damageAmount)
     {
@@ -170,7 +175,19 @@ public class PlayerHealth : MonoBehaviour
     [PunRPC]
     private void OnPlayerEnable() //start
     {
+        currentHealth = 100f;
+        if (Eploxion !=null)
+        {
+              PhotonNetwork.Destroy(Eploxion);
+        }
+      
+        gameObject.transform.position =new Vector3(StartPostion.x,1.5f, StartPostion.z) ;
+        gameObject.SetActive(true);
         shouldIncrementKill = false;
         isAlive = true;
+    }
+    public void OnPlayerRespawn()
+    {
+        view.RPC("OnPlayerEnable", RpcTarget.AllBuffered);
     }
 }

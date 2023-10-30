@@ -8,11 +8,14 @@ using UnityEngine;
 public class CheckCollision : MonoBehaviour
 {
 
-    private WeaponSystem Ws;
- private PlayerHealth P_health;
-  [SerializeField]  PhotonView view;
+    private WeaponSystem Ws;//weapon enum
+    private PlayerHealth P_health;//player health
+   [SerializeField]  PhotonView view;
+
+    CarEnginesound sound ;//sound 
     private void Start()
     {
+        sound = GetComponentInChildren<CarEnginesound>();
         Ws = GetComponent<WeaponSystem>();
       P_health = GetComponent<PlayerHealth>();
         view = GetComponent<PhotonView>();
@@ -29,7 +32,7 @@ public class CheckCollision : MonoBehaviour
             {
                 Ws.isCountingDown = false;
             }
-         
+           sound.PickUpsound();
             view.RPC("WeaponTypeSnicRPC", RpcTarget.All, WeaponType.SimpleGun);
             Debug.Log("collected " + other.name);
 
@@ -43,6 +46,7 @@ public class CheckCollision : MonoBehaviour
             {
                 Ws.isCountingDown = false;
             }
+            sound.PickUpsound();
             view.RPC("WeaponTypeSnicRPC", RpcTarget.All, WeaponType.miniGun);
             Debug.Log("collected " + other.name);
 
@@ -55,6 +59,7 @@ public class CheckCollision : MonoBehaviour
             {
                 Ws.isCountingDown = false;
             }
+            sound.PickUpsound();
             Debug.Log("collected " + other.name);
             view.RPC("WeaponTypeSnicRPC", RpcTarget.All, WeaponType.Rocketlauncher);
 
@@ -65,6 +70,7 @@ public class CheckCollision : MonoBehaviour
             {
                 Ws.isCountingDown = false;
             }
+            sound.PickUpsound();
             //  Ws.Type = WeaponType.DoubleminiGun;
             view.RPC("WeaponTypeSnicRPC", RpcTarget.All, WeaponType.DoubleminiGun);
             Debug.Log("DoubleMiniGun collected");
@@ -72,6 +78,7 @@ public class CheckCollision : MonoBehaviour
         if (other.CompareTag("ShieldLevel4"))
         {
             Ws.EnableWeapon(4);
+            sound.PickUpsound();
         }
 
     }
@@ -85,6 +92,22 @@ public class CheckCollision : MonoBehaviour
         {
 
             P_health.TakeDamage(10);
+
+        }
+
+        if (collision.collider.tag == "Missile")
+        {
+
+            P_health.TakeDamage(50);
+
+        }
+        if (collision.collider.tag == "Ground" || collision.collider.tag == "Objects")
+        {
+         
+           
+            // Check the magnitude of the collision force
+            float collisionForce = collision.impulse.magnitude;
+            sound.PlayCollsionSound(collisionForce);
 
         }
 

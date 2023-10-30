@@ -2,6 +2,8 @@
 using UnityEngine;
 using System.Collections;
 using Photon.Pun;
+using Unity.VisualScripting;
+
 public class ArcadeCar : MonoBehaviour
 {
     
@@ -367,6 +369,7 @@ public class ArcadeCar : MonoBehaviour
         }
     }
 
+  
     void Update()
     {
         if (view.IsMine)
@@ -379,12 +382,12 @@ public class ArcadeCar : MonoBehaviour
             {
                 skidEmmiter(true);
 
-                AudioManger.instance.Play("Drift");
+                 GetComponentInChildren<CarEnginesound>().PlayskidSound();
 
             }
             else
             {
-                AudioManger.instance.Stop("Drift");
+                GetComponentInChildren<CarEnginesound>().StopSound("Drift");
                 skidEmmiter(false);
             }
         }
