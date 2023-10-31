@@ -3717,8 +3717,8 @@ MonoBehaviour:
   - {fileID: 8181626203881038777, guid: e935fea164ebf59419f9bbf9b85814cc, type: 3}
   - {fileID: 4671201375443690044, guid: 393f1a969dbf8e74ea79c57bf2153edc, type: 3}
   - {fileID: 4671201375443690044, guid: 393f1a969dbf8e74ea79c57bf2153edc, type: 3}
-  - {fileID: 398552337659534399, guid: 23fde9f7c6bb71249a925f1631408db1, type: 3}
-  - {fileID: 398552337659534399, guid: 23fde9f7c6bb71249a925f1631408db1, type: 3}
+  - {fileID: 8181626203881038777, guid: e935fea164ebf59419f9bbf9b85814cc, type: 3}
+  - {fileID: 8181626203881038777, guid: e935fea164ebf59419f9bbf9b85814cc, type: 3}
   weaponHolderChilds: []
   waypoints:
   - {fileID: 2032793598}

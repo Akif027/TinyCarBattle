@@ -874,8 +874,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PositionModel:
     SynchronizeEnabled: 1
-    TeleportEnabled: 1
-    TeleportIfDistanceGreaterThan: 10
+    TeleportEnabled: 0
+    TeleportIfDistanceGreaterThan: 0
     InterpolateOption: 2
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 1
@@ -1019,6 +1019,7 @@ MonoBehaviour:
   damageRate: 10
   killCount: 0
   isAlive: 1
+  view: {fileID: 0}
   ExplosionVFX: {fileID: 7392004036631623824, guid: 5a8a04ee2bbb24c458cb017374bebcec, type: 3}
 --- !u!114 &8223974477924013396
 MonoBehaviour:
