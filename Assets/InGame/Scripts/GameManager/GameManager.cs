@@ -63,36 +63,44 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-       
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            // Toggle the visibility of the cursor
+            Cursor.visible = !Cursor.visible;
+
+            // Lock or unlock the cursor based on visibility
+            Cursor.lockState = Cursor.visible ? CursorLockMode.None : CursorLockMode.Locked;
+        }
+
         if (gameStarted && !gameFinished )
         {
             CountDownStarted = false;
             AudioManger.instance.Stop("TextCountDown");
 
-         
-            // Update the timer
-            seconds += Time.deltaTime;
-
-            // Check if one second has passed
-            if (seconds >= 1f)
+            if (gameStarted && !gameFinished)
             {
-                seconds -= 1f; // Reduce seconds by 1
-                minutes += 1; // Increase minutes by 1
-            }
+                // Update the timer
+                seconds += Time.deltaTime;
 
-            // Update the UI
-            UImanager.instance.gameTimeText.text = string.Format("{0:00}:{1:00}", minutes, Mathf.FloorToInt(seconds));
+                // Check if one second has passed
+                if (seconds >= 60f)
+                {
+                    seconds -= 60f; // Reduce seconds by 60
+                    minutes += 1;   // Increase minutes by 1
+                }
 
-            // Check if the game time limit is reached
-            if (minutes >= GameTimeLimit)
-            {
-                gameFinished = true;
-                CheckForWinner();
-                // You might want to add some code to handle the game finishing.
+                // Update the UI
+                UImanager.instance.gameTimeText.text = string.Format("{0:00}:{1:00}", minutes, Mathf.FloorToInt(seconds));
+
+                // Check if the game time limit is reached
+                if (minutes >= GameTimeLimit)
+                {
+                    gameFinished = true;
+                    CheckForWinner();
+                    // You might want to add some code to handle the game finishing.
+                }
             }
-          
-             
-           
 
         }
         if (CountDownStarted)

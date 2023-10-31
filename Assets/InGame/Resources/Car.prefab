@@ -1801,6 +1801,7 @@ MonoBehaviour:
   damageRate: 10
   killCount: 0
   isAlive: 1
+  view: {fileID: 0}
   ExplosionVFX: {fileID: 7392004036631623824, guid: 5a8a04ee2bbb24c458cb017374bebcec, type: 3}
 --- !u!114 &-4309963603188936086
 MonoBehaviour:

@@ -7,7 +7,7 @@ public class AudioManger : MonoBehaviour
     public static AudioManger instance;
 
     public Sound[] sounds;
-
+    public AudioSource audioSource;
     private void Awake()
     {
         if (instance == null)
@@ -18,12 +18,12 @@ public class AudioManger : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+      //  DontDestroyOnLoad(gameObject);
        
         foreach (Sound s in sounds)
         {
 
-            s.source = gameObject.GetComponent<AudioSource>();
+            s.source = audioSource;
 
           
         }

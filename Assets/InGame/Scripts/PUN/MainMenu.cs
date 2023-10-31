@@ -68,4 +68,8 @@ public class MainMenu : MonoBehaviourPunCallbacks
         }
      
     }
+    public void Quit() { 
+    
+      Application.Quit();
+    }
 }
