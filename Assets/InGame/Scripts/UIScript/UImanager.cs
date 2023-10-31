@@ -16,9 +16,13 @@ public class UImanager : MonoBehaviourPunCallbacks
     public TMP_Text gameTimeText;
     public TMP_Text killText;
     public Slider healthSlider;
- 
+    public Transform arenaCenter;
     public GameObject pausePanel;
- 
+    public GameObject KillLeaderBoardPanel;
+
+    public GameObject WinnerGameOverPanel;
+    public GameObject DefeatGameOverPanel;
+
     private void Awake()
     {
         instance = this;
@@ -72,7 +76,19 @@ public class UImanager : MonoBehaviourPunCallbacks
         pausePanel.SetActive(true);
     }
 
-
+    public void CloseOrOpenKillLeaderPanel()
+    {
+        Debug.Log("closed");
+        if (KillLeaderBoardPanel.activeInHierarchy)
+        {
+            KillLeaderBoardPanel.SetActive(false);
+        }
+        else
+        {
+            KillLeaderBoardPanel.SetActive(true);
+        }
+        
+    }
 
 
 }

@@ -93,15 +93,16 @@ public class CheckCollision : MonoBehaviour
 
             P_health.TakeDamage(10);
 
+          sound.BulletImpact();
         }
 
         if (collision.collider.tag == "Missile")
         {
-
-            P_health.TakeDamage(50);
+            Debug.Log("missile hit");
+            P_health.TakeDamage(100);
 
         }
-        if (collision.collider.tag == "Ground" || collision.collider.tag == "Objects")
+        if (/*collision.collider.tag == "Ground" || */collision.collider.tag == "Objects")
         {
          
            

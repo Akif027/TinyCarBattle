@@ -1,10 +1,9 @@
 
 using Photon.Pun;
-
 using UnityEngine;
 
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth :  MonoBehaviourPun
 {
 
     public float maxHealth = 100.0f;
@@ -21,9 +20,9 @@ public class PlayerHealth : MonoBehaviour
 
     //private bool isTakingDamage = false;
 
-    private PhotonView view;
+    public PhotonView view;
 
-    Vector3 StartPostion;
+   
     public GameObject ExplosionVFX;
   
     public bool isPlayerAlive
@@ -62,28 +61,41 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Awake()
     {
 
         view = GetComponent<PhotonView>();
-      
 
-       
+        ObjectPool.Instance.CreatePool(ExplosionVFX, 1);
     }
+
+
+
     private void Start()
     {
-        StartPostion = transform.position;
+
+        OnPlayerRespawn();
 
         if (view.IsMine)
         {
 
+            // Check if PhotonNetwork.NickName is null or empty
+            if (string.IsNullOrEmpty(PhotonNetwork.NickName))
+            {
+                // If null or empty, generate a random integer as a nickname
+                int randomNickname = Random.Range(1000, 9999);
+                PhotonNetwork.NickName = "Player" + randomNickname.ToString();
+            }
+
+            // Update the UI with the player's nickname
             UImanager.instance.NameText.text = PhotonNetwork.NickName;
-            gameObject.name = PhotonNetwork.NickName;
+
+
         }
         else
         {
             UImanager.instance.NameText.text = view.Owner.NickName;
-            gameObject.name = view.Owner.NickName;
+        
         }
         // Set the initial health and max value of the slider.
         currentHealth = maxHealth;
@@ -96,20 +108,28 @@ public class PlayerHealth : MonoBehaviour
     {
         if (view.IsMine)
         {
+            GameManager.Instance.LocalPlayerKills = killCount;
             // Check if otherPlayerH is not null and isPlayerAlive
             if (otherPlayerH != null && !otherPlayerH.isPlayerAlive)
             {
                 // Check if ShouldkillInc is true
                 if (otherPlayerH.ShouldkillInc)
                 {
+                    int playerID = otherPlayerH.view.Owner.ActorNumber;
+
                     killCount++;
                     UImanager.instance.killText.text = killCount.ToString();
                     otherPlayerH.ShouldkillInc = false;
+                    GameManager.Instance.OnPlayerDeath(playerID);
                 }
             }
+
+         
+
         }
 
     }
+
 
     public void TakeDamage(float damageAmount)
     {
@@ -131,13 +151,6 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    GameObject Eploxion =null; // Imact VFX
-    private void OnDisable()
-    {
-
-     Eploxion =  PhotonNetwork.Instantiate(ExplosionVFX.name, transform.position,transform.rotation);
-    
-    }
 
     private void ApplyDamageDirectly(float damageAmount)
     {
@@ -147,47 +160,82 @@ public class PlayerHealth : MonoBehaviour
 
             // Update UI
             UImanager.instance.healthSlider.value = currentHealth;
-    
 
-        // Check if the player has died
-        if (currentHealth <= 0 )
+        if (currentHealth<=0)
         {
-            
-                OnPlayerDie();
-                Debug.Log("Dead");
-          
-           
+            OnPlayerDie();
         }
     }
+  
+    private void healthBuff(float heatlh)
+    {
+
+        // Subtract damage from health
+        currentHealth = heatlh;
+
+        // Update UI
+        UImanager.instance.healthSlider.value = currentHealth;
+
+
+      
+    }
+/*    private void OnDisable()
+    {
+       
+    }*/
     public void OnPlayerDie()
     {
+   
         view.RPC("OnPlayerDieRPC", RpcTarget.AllBuffered);
+       
     }
   
     [PunRPC]
     private void OnPlayerDieRPC()
     {
+
+   
+          GameObject Explosion = ObjectPool.Instance.GetPooledObject(ExplosionVFX);
+        if (Explosion != null)
+        {
+
+            Explosion.transform.position = transform.position;
+            Explosion.transform.rotation = transform.rotation;
+
+        }
+   
         shouldIncrementKill = true;
         isAlive = false;    
-      gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     [PunRPC]
     private void OnPlayerEnable() //start
     {
-        currentHealth = 100f;
-        if (Eploxion !=null)
-        {
-              PhotonNetwork.Destroy(Eploxion);
-        }
-      
-        gameObject.transform.position =new Vector3(StartPostion.x,1.5f, StartPostion.z) ;
+
+
+        GameManager.Instance.InitializePlayerStats(view.Owner);
         gameObject.SetActive(true);
         shouldIncrementKill = false;
         isAlive = true;
+        CarEnginesound sounds = GetComponentInChildren<CarEnginesound>();
+        foreach (Sound s in sounds.sounds)
+        {
+            s.source.Stop();
+        }
+        if (view.IsMine)
+        {
+            healthBuff(100);
+
+            // gameObject.transform.position =new Vector3(StartPostion.x,StartPostion.y +5,StartPostion.z);
+
+        }
+      
     }
     public void OnPlayerRespawn()
     {
+
         view.RPC("OnPlayerEnable", RpcTarget.AllBuffered);
+
     }
 }

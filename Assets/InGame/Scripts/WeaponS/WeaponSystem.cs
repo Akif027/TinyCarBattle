@@ -245,7 +245,7 @@ public class WeaponSystem : MonoBehaviourPun
     [PunRPC]
     private void SimpleGunWeapon()
     {
-        sound.SimpleGunshotPlay("GunShot");
+     
 
 
         Debug.Log("gun firing");
@@ -269,6 +269,7 @@ public class WeaponSystem : MonoBehaviourPun
 
             // Apply the adjusted speed to the bullet's velocity
             projectile.GetComponent<Rigidbody>().velocity = weaponData[0].FirePoint.transform.forward * adjustedBulletSpeed;
+            sound.SimpleGunshotPlay("GunShot");
         }
 
 

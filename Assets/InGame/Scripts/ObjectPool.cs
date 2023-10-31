@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ObjectPool : MonoBehaviour
+public class ObjectPool : MonoBehaviourPun
 {
     public static ObjectPool Instance;
     public GameObject BulletPrefab;
@@ -31,6 +32,7 @@ public class ObjectPool : MonoBehaviour
             for (int i = 0; i < amountToPool; i++)
             {
                 GameObject temp = Instantiate(objectToPool, transform);
+            
                 temp.SetActive(false);
                 pooledObjectsList.Add(temp);
             }

@@ -19,9 +19,13 @@ public class SpawnPlayer : MonoBehaviour
 
     private int CarIndex = 0;
 
-    private float RespawnTime = 5f;
+ 
+    [SerializeField]private float RespawnTime = 5f;
+
+    [SerializeField] PhotonView view;
     private void Awake()
     {
+    
         CarIndex = PlayerPrefs.GetInt("CarIndex");
      
         Debug.Log(CarIndex);
@@ -46,6 +50,7 @@ public class SpawnPlayer : MonoBehaviour
             SpawnPlayers();
         }
         player = FindObjectOfType<PlayerHealth>();
+        view = player.GetComponent<PhotonView>();
     }
 
     private void SpawnPlayers()
@@ -69,32 +74,36 @@ public class SpawnPlayer : MonoBehaviour
 
     private void Update()
     {
-     
-        if (!player.isAlive)
+        if (player != null)
         {
-            StartCoroutine(RepawnPlayer());
+            if (!player.isAlive)
+            {
+                if (view.IsMine)
+                {
+                    RespawnTime -= Time.deltaTime;
+
+                    if (RespawnTime <= 0f)
+                    {
+                        UImanager.instance.gameStartCountDownTxt.gameObject.SetActive(false);
+                        player.OnPlayerRespawn();
+                        RespawnTime = 5f; // Reset the timer when the player respawns
+                    }
+                    else
+                    {
+                        UImanager.instance.gameStartCountDownTxt.gameObject.SetActive(true);
+                        // Display the current countdown time in the UI Text
+                        UImanager.instance.gameStartCountDownTxt.text = Mathf.CeilToInt(RespawnTime).ToString("0");
+                    }
+                }
+            }
+            else
+            {
+                // Reset the timer when the player is alive
+                RespawnTime = 5f;
+            }
         }
+
     }
     
 
-    IEnumerator RepawnPlayer()
-    {
-        float currentTime = RespawnTime;
-        UImanager.instance.gameStartCountDownTxt.gameObject.SetActive(true);
-        while (currentTime > 0)
-        {
-            // Display the current countdown time in the UI Text
-            UImanager.instance.gameStartCountDownTxt.text = currentTime.ToString("0");
-
-            // Wait for one second
-            yield return new WaitForSeconds(1f);
-
-            // Decrease the countdown time
-            currentTime--;
-        }
-
-
-        UImanager.instance.gameStartCountDownTxt.gameObject.SetActive(false);
-        player.OnPlayerRespawn();
-    }
 }

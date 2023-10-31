@@ -1319,6 +1319,7 @@ GameObject:
   - component: {fileID: -4459368853435011680}
   - component: {fileID: -9001971854241706624}
   - component: {fileID: 4194675269511173429}
+  - component: {fileID: -4309963603188936086}
   m_Layer: 0
   m_Name: Car
   m_TagString: Player
@@ -1379,7 +1380,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1362500960329701627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1801,6 +1802,20 @@ MonoBehaviour:
   killCount: 0
   isAlive: 1
   ExplosionVFX: {fileID: 7392004036631623824, guid: 5a8a04ee2bbb24c458cb017374bebcec, type: 3}
+--- !u!114 &-4309963603188936086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362500960329701624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf62fe6e0ed56843ba7e456d2bd8954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arenaCenter: {fileID: 0}
+  arenaRadius: 55
 --- !u!1 &1362500960435653850
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,7 +2225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1158358410001991875}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2245,9 +2260,9 @@ GameObject:
   - component: {fileID: 4831209730487084110}
   - component: {fileID: 4831209730485954190}
   - component: {fileID: 6072793050898368512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: level4
-  m_TagString: Untagged
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2260,7 +2275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4831209730487892046}
   m_LocalRotation: {x: -0.7071009, y: 0.0028978884, z: 0.0028978437, w: 0.70710087}
-  m_LocalPosition: {x: 0.019999623, y: -0.357, z: 2.539001}
+  m_LocalPosition: {x: -0.02, y: -0.3, z: 2.7}
   m_LocalScale: {x: -15.567005, y: -15.567, z: -15.567003}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2378,7 +2393,7 @@ GameObject:
   - component: {fileID: 4681678436168978738}
   - component: {fileID: 3058830575425066241}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: CarSoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2415,6 +2430,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 56c7ad2bedbbf3a4cbb0173ec0e9d740, type: 3}
   - {fileID: 8300000, guid: 22cd46996da3b624bb08935264560d8c, type: 3}
+  - {fileID: 8300000, guid: cbfe3b38017e72e428f0bd68ecb9356a, type: 3}
   carRigidbody: {fileID: 1362500960329701626}
   minSpeed: 0
   maxSpeed: 100

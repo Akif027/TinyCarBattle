@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CarPrice: 50
   CarName: 
-  CarType: {fileID: 5969535966276748658, guid: 46fce517229939045badff0df9d4d59d, type: 3}
+  CarType: {fileID: 1796043419081110503, guid: d8328c7340fd8994b95fc7306760d32b, type: 3}

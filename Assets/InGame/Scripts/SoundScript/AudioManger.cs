@@ -62,4 +62,10 @@ public class AudioManger : MonoBehaviour
 
         s.source.Stop();
     }
+
+
+    private void OnDisable()
+    {
+      GetComponent<AudioSource>().Stop();
+    }
 }

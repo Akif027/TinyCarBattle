@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using System.Collections;
 
-public class WeaponSpawner : MonoBehaviour
+public class WeaponSpawner : MonoBehaviourPun
 {
     public List<GameObject> weapons;
     public float minX, maxX, minZ, maxZ;

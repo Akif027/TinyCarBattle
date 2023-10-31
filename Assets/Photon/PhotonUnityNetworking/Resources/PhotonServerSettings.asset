@@ -57,6 +57,9 @@ MonoBehaviour:
   - PlaySimpleSoundRPC
   - StopSound
   - StopSoundRPC
+  - UpdateKillLeaderScore
+  - UpdateLeaderboard
+  - SyncKills
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

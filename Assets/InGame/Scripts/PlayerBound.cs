@@ -5,26 +5,26 @@ using UnityEngine;
 
 public class PlayerBound : MonoBehaviour
 {
-    public AudioSource s;
-/*    public float minX, maxX, minZ, maxZ; // Define the boundaries of the area
+    public Transform arenaCenter;
+    public float arenaRadius = 10f;
 
-    void Update()
+    private void Start()
     {
-        // Get the current position of the player
-        Vector3 currentPosition = transform.position;
-
-        // Clamp the X and Z coordinates to stay within the defined boundaries
-        float clampedX = Mathf.Clamp(currentPosition.x, minX, maxX);
-        float clampedZ = Mathf.Clamp(currentPosition.z, minZ, maxZ);
-
-        // Update the position of the player with the clamped values
-        transform.position = new Vector3(clampedX, currentPosition.y, clampedZ);
-    }*/
-
-
-
+        arenaCenter = UImanager.instance.arenaCenter;
+    }
     private void Update()
     {
-    
+        // Calculate the direction from the center of the circle to the car
+        Vector3 directionToCenter = transform.position - arenaCenter.position;
+
+        // Clamp the magnitude (radius) to stay within the circular bounds
+        Vector3 clampedDirection = Vector3.ClampMagnitude(directionToCenter, arenaRadius);
+
+        // Calculate the new position relative to the center
+        Vector3 newPosition = arenaCenter.position + clampedDirection;
+
+        // Update the car's position
+        transform.position = newPosition;
     }
+
 }

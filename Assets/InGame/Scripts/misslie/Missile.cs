@@ -30,6 +30,7 @@ namespace Tarodev {
         private void OnEnable()
         {
             StartCoroutine(isLaunched());
+            StartCoroutine(DisableAfterDelay());
         }
         private void FixedUpdate() {
           
@@ -50,6 +51,14 @@ namespace Tarodev {
                
          
           
+        }
+
+        private IEnumerator DisableAfterDelay()
+        {
+            // Wait for the specified delay
+            yield return new WaitForSeconds(3);
+
+            gameObject.SetActive(false);
         }
         public void setPView(PlayerHealth p)
         {
@@ -92,13 +101,16 @@ namespace Tarodev {
                 PlayerHealth otherPlayerH = collision.gameObject.GetComponent<PlayerHealth>();
 
                 PH.OtherPlayerHealth = otherPlayerH;
-
-
+                if (otherPlayerH.view.IsMine)
+                {
+                    otherPlayerH.TakeDamage(100);
+                }
+              
                 //gameObject.SetActive(false);
             }
             //GameObject impact = Instantiate(bulletImact, transform.position, Quaternion.identity);
             //Destroy(impact, 1);
-            gameObject.SetActive(false);
+          //  gameObject.SetActive(false);
         }
 
         private void OnDrawGizmos() {
