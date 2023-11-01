@@ -41,16 +41,14 @@ MonoBehaviour:
   - MiniGunWeapon
   - OnPlayerDieRPC
   - OnPlayerEnable
-  - RocketLauncherWeapon
-  - SimpleGunWeapon
-  - SyncRotationRPC
-  - WeaponTypeSnicRPC
   - PlayBasicSound
   - PlayCollsionSoundRPC
+  - RocketLauncherWeapon
+  - SimpleGunWeapon
   - StopSoundRPC
-  - UpdateKillLeaderScore
-  - UpdateLeaderboard
   - SyncKills
+  - SyncRotationRPC
+  - WeaponTypeSnicRPC
   - ClickRpc
   - DestroyRpc
   - DestroySpaceship

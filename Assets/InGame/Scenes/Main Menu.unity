@@ -12126,7 +12126,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.6
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -13360,8 +13360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cars:
   - {fileID: 335663662}
-  - {fileID: 4808295119272938298}
   - {fileID: 1977121762752912}
+  - {fileID: 4808295119272938298}
   - {fileID: 4689765774900743649}
 --- !u!23 &1014682955
 MeshRenderer:

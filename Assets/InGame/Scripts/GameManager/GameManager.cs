@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
             else
             {
-                UImanager.instance.DefeatGameOverPanel.SetActive(false);
+                UImanager.instance.DefeatGameOverPanel.SetActive(true);
             }
 
            
