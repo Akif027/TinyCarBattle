@@ -78,7 +78,6 @@ public class PlayerHealth :  MonoBehaviourPun
 
         if (view.IsMine)
         {
-
             // Check if PhotonNetwork.NickName is null or empty
             if (string.IsNullOrEmpty(PhotonNetwork.NickName))
             {
@@ -89,13 +88,17 @@ public class PlayerHealth :  MonoBehaviourPun
 
             // Update the UI with the player's nickname
             UImanager.instance.NameText.text = PhotonNetwork.NickName;
-
-
         }
         else
         {
+            // Check if the remote player's nickname is null or empty
+            if (string.IsNullOrEmpty(view.Owner.NickName))
+            {
+                // If null or empty, generate a random integer as a nickname
+                int randomNickname = Random.Range(1000, 9999);
+                view.Owner.NickName = "Player" + randomNickname.ToString();
+            }
             UImanager.instance.NameText.text = view.Owner.NickName;
-        
         }
         // Set the initial health and max value of the slider.
         currentHealth = maxHealth;

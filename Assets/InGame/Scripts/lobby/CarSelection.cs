@@ -59,6 +59,7 @@ public class CarSelection : MonoBehaviour
 
     void SetCarActive(int index, bool isActive = true)
     {
+       
         // Set the specified car's active state
         if (index >= 0 && index < cars.Length)
         {
@@ -70,6 +71,7 @@ public class CarSelection : MonoBehaviour
     private void OnDisable()
     {
         PlayerPrefs.SetInt("CarIndex", currentCarIndex);
+        Debug.Log(currentCarIndex);
     }
 
   
